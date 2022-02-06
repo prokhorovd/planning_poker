@@ -15,7 +15,8 @@ function ServerTest() {
   return (
     <div>
       Server is now:
-      <p>{serverState}</p>
+      {' '}
+      <b>{serverState}</b>
     </div>
   )
 }

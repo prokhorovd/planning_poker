@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ServerTest from './components/ServerTest';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <p>
           Welcome to react template blank page.
         </p>
+        <ServerTest />
       </header>
     </div>
   );
