@@ -1,0 +1,23 @@
+{
+  "name": "planning-poker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/server/app.tsx",
+  "scripts": {
+    "client:serve" : "concurrently --kill-others-on-fail \"cd client && npm run serve\"",
+    "server:serve" : "concurrently --kill-others-on-fail \"cd server && npm run serve\"",
+    "serve" : "concurrently --kill-others-on-fail \"npm run client:serve\" \"npm run server:serve\"",
+    "client:build" : "concurrently --kill-others-on-fail \"npm run clean && cd client && npm run build\"",
+    "clean": "rm -rf client/build",
+    "client:start" : "concurrently --kill-others-on-fail \"npm run client:build && cd client && npm run serve -s build\"",
+    "server:start" : "concurrently --kill-others-on-fail \"cd server && npm run start\"",
+    "start" : "concurrently --kill-others-on-fail \"npm run server:start\" \"npm run client:build\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dmitriy Prokhorov",
+  "license": "ISC",
+  "workspaces": [
+    "client",
+    "server"
+  ]
+}
