@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.create-room-form {
+    display: flex;
+    flex-direction: column;
+}
