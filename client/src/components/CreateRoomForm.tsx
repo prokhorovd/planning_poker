@@ -4,6 +4,19 @@ import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {TextField, IconButton} from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import { styled } from '@mui/material/styles';
+
+const SubmitButton = styled(IconButton)`
+  background-color: #000000;
+  margin-top: 20px;
+  width: 60px;
+  height: 60px;
+  align-self: center;
+
+  :hover {
+    background-color: #5f5f5f;
+  }
+`;
 
 function CreateRoomForm () {
   const formik = useFormik({
@@ -55,9 +68,9 @@ function CreateRoomForm () {
         required
       />
       {formik.touched.roomName && formik.errors.roomName ? <div className='create-room-form__error'>{formik.errors.roomName}</div> : null}
-      <IconButton type='submit' size='large' aria-label="submit-button" sx={{ marginTop: '20px', width: 60, height: 60, backgroundColor: '#000', alignSelf: 'center'}}>
-        <ArrowRightAltIcon sx={{color: '#FFF'}} />
-      </IconButton>
+      <SubmitButton type='submit' size='large' aria-label="submit-button">
+        <ArrowRightAltIcon className='create-room-button__arrow' />
+      </SubmitButton>
     </form>
   );
 }
