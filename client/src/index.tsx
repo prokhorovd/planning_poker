@@ -1,12 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 // import reportWebVitals from './reportWebVitals';
 import App from './App';
+import {ThemeProvider} from 'styled-components';
+import theme from './theme';
+import styled from 'styled-components';
+
+const StyleDefaults = styled.div`
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+`
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <StyleDefaults>
+        <App />
+      </StyleDefaults>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

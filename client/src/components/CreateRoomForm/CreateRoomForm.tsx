@@ -1,22 +1,8 @@
 import React from 'react';
-import './CreateRoomForm.css';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-import {TextField, IconButton} from '@mui/material';
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-import { styled } from '@mui/material/styles';
-
-const SubmitButton = styled(IconButton)`
-  background-color: #000000;
-  margin-top: 20px;
-  width: 60px;
-  height: 60px;
-  align-self: center;
-
-  :hover {
-    background-color: #5f5f5f;
-  }
-`;
+import {TextField} from '@mui/material';
+import {SubmitButton, SubmitButtonIcon, CreateRoomFormLayout, CreateRoomFormError} from './styled';
 
 function CreateRoomForm () {
   const formik = useFormik({
@@ -39,7 +25,7 @@ function CreateRoomForm () {
     }
   });
   return (
-    <form className='create-room-form' onSubmit={formik.handleSubmit}>
+      <CreateRoomFormLayout onSubmit={formik.handleSubmit}>
       <TextField
         label="User name"
         variant="standard"
@@ -53,7 +39,7 @@ function CreateRoomForm () {
         error={formik.touched.userName && Boolean(formik.errors.userName)}
         required
       />
-      {formik.touched.userName && formik.errors.userName ? <div className='create-room-form__error'>{formik.errors.userName}</div> : null}
+      {formik.touched.userName && formik.errors.userName ? <CreateRoomFormError>{formik.errors.userName}</CreateRoomFormError> : null}
       <TextField
         label="Room name"
         variant="standard"
@@ -67,11 +53,11 @@ function CreateRoomForm () {
         error={formik.touched.roomName && Boolean(formik.errors.roomName)}
         required
       />
-      {formik.touched.roomName && formik.errors.roomName ? <div className='create-room-form__error'>{formik.errors.roomName}</div> : null}
+      {formik.touched.roomName && formik.errors.roomName ? <CreateRoomFormError>{formik.errors.roomName}</CreateRoomFormError> : null}
       <SubmitButton type='submit' size='large' aria-label="submit-button">
-        <ArrowRightAltIcon className='create-room-button__arrow' />
+        <SubmitButtonIcon />
       </SubmitButton>
-    </form>
+    </CreateRoomFormLayout>
   );
 }
 
