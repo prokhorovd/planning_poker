@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import Header from './components/Header/Header';
 import CreateRoomForm from './components/CreateRoomForm/CreateRoomForm';
 import IconPicker from './components/IconPicker/IconPicker';
@@ -20,7 +20,7 @@ function App() {
       <IconPicker />
       <CreateRoomForm />
     </AppWrapper>
-  )
+  );
 }
 
 export default App;
