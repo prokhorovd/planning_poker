@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Header from './components/Header/Header';
 import CreateRoomForm from './components/CreateRoomForm/CreateRoomForm';
 import IconPicker from './components/IconPicker/IconPicker';
+import Timer from './components/Timer/Timer';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ function App() {
       <Header />
       <IconPicker />
       <CreateRoomForm />
+      <Timer/>
     </AppWrapper>
   );
 }
