@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import CreateRoomForm from './components/CreateRoomForm/CreateRoomForm';
 import IconPicker from './components/IconPicker/IconPicker';
 import Timer from './components/Timer/Timer';
+import Cards from './components/Cards/Cards';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -21,6 +22,7 @@ function App() {
       <IconPicker />
       <CreateRoomForm />
       <Timer/>
+      <Cards />
     </AppWrapper>
   );
 }
