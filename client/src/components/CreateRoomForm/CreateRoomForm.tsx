@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {TextField} from '@mui/material';
 import {SubmitButton, SubmitButtonIcon, CreateRoomFormLayout, CreateRoomFormError} from './styled';
 
-function CreateRoomForm () {
+const CreateRoomForm:FC = () => {
   const formik = useFormik({
     initialValues: {
       userName: '',

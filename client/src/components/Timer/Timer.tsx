@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Button} from '@mui/material';
 import {TimerWrapper, ClockWrapper} from './styled';
 
-function Timer() {
+const Timer:FC = () => {
   const [startValue, setStartValue] = useState(60);
   const [timeLeft, setTimeLeft] = useState(startValue);
   const [timerActive, setTimerActive] = useState(false);

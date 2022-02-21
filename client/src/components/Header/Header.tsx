@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {HeaderLayout, HeaderLogo, HeaderUserIcon, HeaderUserIconHidden} from './styled';
 
-function Header() {
+const Header:FC = () => {
   const showUserIcon = false;
   return (
     <HeaderLayout>

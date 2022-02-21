@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, FC} from 'react';
 import { CardItem, CardField, CardItemActive } from './styled';
 import { Emoji } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css'
 
-function Cards() {
+const Cards:FC = () => {
   const [activeCard, setActiveCard]= useState(null)
   function Card(props: {cardContent: string | JSX.Element, id: string}) {
     const makeActive = (event: any) => {

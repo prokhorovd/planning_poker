@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {BaseEmoji, Picker, Emoji} from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css'
 import {UserIconLayout, UserIconEmoji} from './styled';
 
-function IconPicker() {
+const IconPicker:FC = () => {
   const [icon, setIcon] = useState<null | BaseEmoji>(null);
   const [showPicker, setShowPicker] = useState(false);
   const handleAddEmoji = (emoji: BaseEmoji) => {
