@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const CardItem = styled.div`
+export const StyledCardItem = styled.div`
   margin: 5px;
   height: 145px;
   width: 90px;
@@ -16,7 +16,7 @@ export const CardItem = styled.div`
   }
 `
 
-export const CardItemActive = styled(CardItem)`
+export const StyledCardItemActive = styled(StyledCardItem)`
   background-color: #caeecc;
 
   &:hover {
@@ -24,7 +24,7 @@ export const CardItemActive = styled(CardItem)`
   }
 `
 
-export const CardField = styled.div`
+export const StyledCardField = styled.div`
   width: 500px;
   display: flex;
   flex-direction: row;
