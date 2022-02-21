@@ -5,38 +5,8 @@ import CreateRoomForm from './components/CreateRoomForm/CreateRoomForm';
 import IconPicker from './components/IconPicker/IconPicker';
 import Timer from './components/Timer/Timer';
 import Cards from './components/Cards/Cards';
-import {UserData} from './components/UserList/UserList';
 import UserList from './components/UserList/UserList';
-
-
-// temp data for component testing purposes
-const dataForUserListComponent: UserData[] = [
-  {
-    userName: 'User1',
-    userEmoji: 'santa',
-    pickedCard: null,
-  },
-  {
-    userName: 'User2',
-    userEmoji: 'coffee',
-    pickedCard: null,
-  },
-  {
-    userName: 'User3',
-    userEmoji: 'smiley',
-    pickedCard: '3',
-  },
-  {
-    userName: 'User4',
-    userEmoji: 'smiley',
-    pickedCard: null,
-  },
-  {
-    userName: 'User5',
-    userEmoji: 'smiley',
-    pickedCard: '5',
-  },
-]
+import { dataForUserListComponent } from './mocks';
 
 function StyledApp() {
   return (
