@@ -6,7 +6,7 @@ import IconPicker from './components/IconPicker/IconPicker';
 import Timer from './components/Timer/Timer';
 import Cards from './components/Cards/Cards';
 import UserList from './components/UserList/UserList';
-import { dataForUserListComponent } from './mocks';
+import { dataForUserListComponent, stateForUserListComponent } from './mocks';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
       <IconPicker />
       <CreateRoomForm />
       {/* listState can be: idle/vote/voted, description in component */}
-      <UserList listState={'idle'} listData={dataForUserListComponent}/>
+      <UserList listState={stateForUserListComponent} listData={dataForUserListComponent}/>
       <Timer/>
       <Cards />
     </StyledApp>

@@ -28,3 +28,5 @@ export const dataForUserListComponent: UserData[] = [
     pickedCard: '5',
   },
 ]
+
+export const stateForUserListComponent = 'idle'; //can be idle vote voted
