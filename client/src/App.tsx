@@ -15,7 +15,7 @@ function App() {
       <IconPicker />
       <CreateRoomForm />
       {/* listState can be: idle/vote/voted, description in component */}
-      <UserList listState={'idle'} listData={dataForUserListComponent}/>
+      <UserList listState={stateForUserListComponent} listData={dataForUserListComponent}/>
       <Timer/>
       <Cards />
     </StyledApp>
