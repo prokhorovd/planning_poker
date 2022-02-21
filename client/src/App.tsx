@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppWrapper } from './styled';
+import { StyledApp } from './styled';
 import Header from './components/Header/Header';
 import CreateRoomForm from './components/CreateRoomForm/CreateRoomForm';
 import IconPicker from './components/IconPicker/IconPicker';
@@ -8,9 +8,9 @@ import Cards from './components/Cards/Cards';
 import UserList from './components/UserList/UserList';
 import { dataForUserListComponent } from './mocks';
 
-function StyledApp() {
+function App() {
   return (
-    <AppWrapper>
+    <StyledApp>
       <Header />
       <IconPicker />
       <CreateRoomForm />
@@ -18,8 +18,8 @@ function StyledApp() {
       <UserList listState={'idle'} listData={dataForUserListComponent}/>
       <Timer/>
       <Cards />
-    </AppWrapper>
+    </StyledApp>
   );
 }
 
-export default StyledApp;
+export default App;
