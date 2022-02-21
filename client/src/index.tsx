@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import reportWebVitals from './reportWebVitals';
-import App from './App';
+import StyledApp from './StyledApp';
 import {createGlobalStyle, ThemeProvider} from 'styled-components';
 import theme from './theme';
 
@@ -21,7 +21,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyle/>
-      <App />
+      <StyledApp />
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
