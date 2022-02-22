@@ -1,4 +1,4 @@
-import {UserData} from './components/UserList/UserList';
+import {UserData, UserListState} from './components/UserList/UserList';
 
 // temp data for UserList component testing purposes
 export const dataForUserListComponent: UserData[] = [
@@ -29,4 +29,4 @@ export const dataForUserListComponent: UserData[] = [
   },
 ]
 
-export const stateForUserListComponent = 'idle'; //can be idle vote voted
+export const stateForUserListComponent = UserListState.Idle; // possible values: Idle, Vote, Voted

@@ -15,15 +15,21 @@ export interface UserData {
   pickedCard: null | string,
 }
 
+export enum UserListState {
+  Idle = 'idle',
+  Vote = 'vote',
+  Voted = 'voted',
+}
+
 interface UserListProps {
-  listState: 'idle' | 'vote' | 'voted',
+  listState: UserListState,
   listData: UserData[],
 }
 
 const UserList: FC<UserListProps> = ({listState, listData}) => {
   // single user card
   const UserCard:FC<UserData> = (userData) => {
-    if (listState === 'idle') {
+    if (listState === UserListState.Idle) {
       // lobby room - show all users
       return(
         <StyledUserCard>
@@ -33,7 +39,7 @@ const UserList: FC<UserListProps> = ({listState, listData}) => {
           <StyledUserName>{userData.userName}</StyledUserName>
         </StyledUserCard>
       );
-    } else if (listState === 'vote') {
+    } else if (listState === UserListState.Vote) {
       // vote process: blur icon if user didn't vote yet, else show green background
       return (
       <StyledUserCard>
