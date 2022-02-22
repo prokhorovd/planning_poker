@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {Button} from '@mui/material';
 import {StyledTimerWrapper, StyledClockWrapper} from './styled';
 
@@ -6,19 +6,27 @@ const Timer:FC = () => {
   const [startValue, setStartValue] = useState(60);
   const [timeLeft, setTimeLeft] = useState(startValue);
   const [timerActive, setTimerActive] = useState(false);
+  const timerIdRef = useRef<null | ReturnType<typeof setInterval>>(null);
 
   // Process countdown when timer is active and timeLeft > 0.
   // Stop timer, set counter to startValue and do some action when done.
   useEffect(() => {
-    if (timerActive && timeLeft > 0) {
-       setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-    } else if (!timerActive) {
+    timerIdRef.current = setInterval(() => {
+      timerActive && timeLeft > 0 && setTimeLeft(timeLeft => timeLeft - 1);
+    }, 1000);
+    // Clear interval, stop timer, set default timer value when count to zero
+    if (timeLeft === 0) {
+      clearInterval(timerIdRef.current);
+      setTimerActive(false);
       setTimeLeft(startValue);
-    } if(timeLeft === 0 && timerActive) {
-      setTimerActive(false)
-      // TODO do something as time is out
       console.log('Time is out!')
+    } if (!timerActive) {
+      // reset timer if stop
+      setTimeLeft(startValue);
     }
+    // Clear interval when unmount
+    // @ts-ignore
+    return () => clearInterval(timerIdRef.current);
   }, [timeLeft, timerActive]);
 
   // display new startTime when new value received
@@ -37,14 +45,14 @@ const Timer:FC = () => {
     if (result.seconds.length === 1) {
       result.seconds = '0' + result.seconds
     }
-    return result;
+    return `${result.minutes} : ${result.seconds}`;
   }
   // calculate time left: seconds => {minutes: n, seconds:n}
   const calculatedTime = calculateTime(timeLeft)
 
   return (
     <StyledTimerWrapper>
-      <StyledClockWrapper>{`${calculatedTime.minutes} : ${calculatedTime.seconds}`}</StyledClockWrapper>
+      <StyledClockWrapper>{calculatedTime}</StyledClockWrapper>
       <div><Button onClick={() => setTimerActive(!timerActive)}>{timerActive ? 'Stop' : 'Start'}</Button></div>
       <div>
         <Button onClick={() => setStartValue(60)} disabled={timerActive}>Set to 1 min</Button>
