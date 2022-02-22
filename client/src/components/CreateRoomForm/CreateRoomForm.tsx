@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {TextField} from '@mui/material';
-import {SubmitButton, SubmitButtonIcon, CreateRoomFormLayout, CreateRoomFormError} from './styled';
+import {StyledSubmitButton, StyledSubmitButtonIcon, StyledCreateRoomForm, StyledCreateRoomFormError} from './styled';
 
 const CreateRoomForm:FC = () => {
   const formik = useFormik({
@@ -25,7 +25,7 @@ const CreateRoomForm:FC = () => {
     }
   });
   return (
-      <CreateRoomFormLayout onSubmit={formik.handleSubmit}>
+      <StyledCreateRoomForm onSubmit={formik.handleSubmit}>
       <TextField
         label="User name"
         variant="standard"
@@ -39,7 +39,7 @@ const CreateRoomForm:FC = () => {
         error={formik.touched.userName && Boolean(formik.errors.userName)}
         required
       />
-      {formik.touched.userName && formik.errors.userName ? <CreateRoomFormError>{formik.errors.userName}</CreateRoomFormError> : null}
+      {formik.touched.userName && formik.errors.userName ? <StyledCreateRoomFormError>{formik.errors.userName}</StyledCreateRoomFormError> : null}
       <TextField
         label="Room name"
         variant="standard"
@@ -53,11 +53,11 @@ const CreateRoomForm:FC = () => {
         error={formik.touched.roomName && Boolean(formik.errors.roomName)}
         required
       />
-      {formik.touched.roomName && formik.errors.roomName ? <CreateRoomFormError>{formik.errors.roomName}</CreateRoomFormError> : null}
-      <SubmitButton type='submit' size='large' aria-label="submit-button">
-        <SubmitButtonIcon />
-      </SubmitButton>
-    </CreateRoomFormLayout>
+      {formik.touched.roomName && formik.errors.roomName ? <StyledCreateRoomFormError>{formik.errors.roomName}</StyledCreateRoomFormError> : null}
+      <StyledSubmitButton type='submit' size='large' aria-label="submit-button">
+        <StyledSubmitButtonIcon />
+      </StyledSubmitButton>
+    </StyledCreateRoomForm>
   );
 }
 

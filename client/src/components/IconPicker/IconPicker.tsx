@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {BaseEmoji, Picker, Emoji} from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css'
-import {UserIconLayout, UserIconEmoji} from './styled';
+import {StyledUserIconLayout, StyledUserIconEmoji} from './styled';
 
 const IconPicker:FC = () => {
   const [icon, setIcon] = useState<null | BaseEmoji>(null);
@@ -11,10 +11,10 @@ const IconPicker:FC = () => {
     setShowPicker(false);
   }
   return (
-    <UserIconLayout>
-      <UserIconEmoji onClick={() => setShowPicker(!showPicker)}>
+    <StyledUserIconLayout>
+      <StyledUserIconEmoji onClick={() => setShowPicker(!showPicker)}>
         {icon === null ? <Emoji emoji=':question:' set='apple' size={24} /> : <Emoji emoji={icon} size={24} />}
-      </UserIconEmoji>
+      </StyledUserIconEmoji>
       {showPicker &&
         <Picker
           set='apple'
@@ -23,7 +23,7 @@ const IconPicker:FC = () => {
           onSelect={handleAddEmoji}
         />
       }
-    </UserIconLayout>
+    </StyledUserIconLayout>
   );
 }
 

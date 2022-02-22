@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import {EMOJI_BACKGROUND} from '../../utils/constants/colors';
 
-export const HeaderLayout = styled.div`
+export const StyledHeaderLayout = styled.div`
   width: 60vw;
   text-align: center;
   display: flex;
@@ -8,18 +9,18 @@ export const HeaderLayout = styled.div`
   justify-content: space-between;
 `
 
-export const HeaderLogo = styled.div`
+export const StyledHeaderLogo = styled.div`
   margin: 30px;
   width: 45px;
   height: 45px;
-  background: url(${process.env.PUBLIC_URL + 'game-logo.png'}) center no-repeat rgba(158, 158, 158, 0.1);
+  background: url(${process.env.PUBLIC_URL + 'game-logo.png'}) center no-repeat ${EMOJI_BACKGROUND};
   border-radius: 15px;
 `
 
-export const HeaderUserIcon = styled.div`
+export const StyledHeaderUserIcon = styled.div`
   margin: 30px;
 `
 
-export const HeaderUserIconHidden = styled.div`
+export const StyledHeaderUserIconHidden = styled.div`
   display: none;
 `

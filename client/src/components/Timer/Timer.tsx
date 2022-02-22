@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Button} from '@mui/material';
-import {TimerWrapper, ClockWrapper} from './styled';
+import {StyledTimerWrapper, StyledClockWrapper} from './styled';
 
 const Timer:FC = () => {
   const [startValue, setStartValue] = useState(60);
@@ -43,15 +43,15 @@ const Timer:FC = () => {
   const calculatedTime = calculateTime(timeLeft)
 
   return (
-    <TimerWrapper>
-      <ClockWrapper>{`${calculatedTime.minutes} : ${calculatedTime.seconds}`}</ClockWrapper>
+    <StyledTimerWrapper>
+      <StyledClockWrapper>{`${calculatedTime.minutes} : ${calculatedTime.seconds}`}</StyledClockWrapper>
       <div><Button onClick={() => setTimerActive(!timerActive)}>{timerActive ? 'Stop' : 'Start'}</Button></div>
       <div>
         <Button onClick={() => setStartValue(60)} disabled={timerActive}>Set to 1 min</Button>
         <Button onClick={() => setStartValue(startValue + 30)} disabled={timerActive || startValue === 3570}>+30 sec</Button>
         <Button onClick={() => setStartValue(startValue - 30)} disabled={timerActive ||  startValue === 30}>-30 sec</Button>
       </div>
-    </TimerWrapper>
+    </StyledTimerWrapper>
   );
 }
 

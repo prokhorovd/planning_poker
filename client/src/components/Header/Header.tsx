@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
-import {HeaderLayout, HeaderLogo, HeaderUserIcon, HeaderUserIconHidden} from './styled';
+import {StyledHeaderLayout, StyledHeaderLogo, StyledHeaderUserIcon, StyledHeaderUserIconHidden} from './styled';
 
 const Header:FC = () => {
   const showUserIcon = false;
   return (
-    <HeaderLayout>
-      <HeaderLogo/>
-      {showUserIcon ? <HeaderUserIcon>icon</HeaderUserIcon> : <HeaderUserIconHidden/>}
-    </HeaderLayout>
+    <StyledHeaderLayout>
+      <StyledHeaderLogo/>
+      {showUserIcon ? <StyledHeaderUserIcon>icon</StyledHeaderUserIcon> : <StyledHeaderUserIconHidden/>}
+    </StyledHeaderLayout>
   )
 }
 

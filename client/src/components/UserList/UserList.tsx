@@ -1,5 +1,12 @@
 import React, {FC} from 'react';
-import {UserCardLayout, UserIconLayout, UserNameLayout, UserListLayout, UserIconLayoutVoted, UserIconLayoutNotVoted} from './styled';
+import {
+  StyledUserCard,
+  StyledUserIcon,
+  StyledUserName,
+  StyledUserIconVoted,
+  StyledUserIconNotVoted,
+  StyledUserList,
+} from './styled';
 import {Emoji} from 'emoji-mart';
 
 export interface UserData {
@@ -19,42 +26,42 @@ const UserList: FC<UserListProps> = ({listState, listData}) => {
     if (listState === 'idle') {
       // lobby room - show all users
       return(
-        <UserCardLayout>
-          <UserIconLayout>
+        <StyledUserCard>
+          <StyledUserIcon>
             <Emoji emoji={userData.userEmoji} size={24}/>
-          </UserIconLayout>
-          <UserNameLayout>{userData.userName}</UserNameLayout>
-        </UserCardLayout>
+          </StyledUserIcon>
+          <StyledUserName>{userData.userName}</StyledUserName>
+        </StyledUserCard>
       );
     } else if (listState === 'vote') {
       // vote process: blur icon if user didn't vote yet, else show green background
       return (
-      <UserCardLayout>
+      <StyledUserCard>
         {userData.pickedCard ?
-        <UserIconLayoutVoted>
+        <StyledUserIconVoted>
           <Emoji emoji={userData.userEmoji} size={24}/>
-        </UserIconLayoutVoted>
+        </StyledUserIconVoted>
           :
-        <UserIconLayoutNotVoted>
+        <StyledUserIconNotVoted>
           <Emoji emoji={userData.userEmoji} size={24}/>
-        </UserIconLayoutNotVoted>}
-        <UserNameLayout>{userData.userName}</UserNameLayout>
-      </UserCardLayout>
+        </StyledUserIconNotVoted>}
+        <StyledUserName>{userData.userName}</StyledUserName>
+      </StyledUserCard>
       );
     }
     // result page: show users choice.
     return(
-      <UserCardLayout>
+      <StyledUserCard>
         {userData.pickedCard ?
-          <UserIconLayout>
+          <StyledUserIcon>
             {userData.pickedCard}
-          </UserIconLayout>
+          </StyledUserIcon>
           :
-          <UserIconLayoutNotVoted>
+          <StyledUserIconNotVoted>
             <Emoji emoji={userData.userEmoji} size={24}/>
-          </UserIconLayoutNotVoted>}
-        <UserNameLayout>{userData.userName}</UserNameLayout>
-      </UserCardLayout>
+          </StyledUserIconNotVoted>}
+        <StyledUserName>{userData.userName}</StyledUserName>
+      </StyledUserCard>
     );
   }
   // make list of user cards
@@ -63,8 +70,8 @@ const UserList: FC<UserListProps> = ({listState, listData}) => {
   )
   return (
     <div>
-      <div>liststate is: {listState}</div>
-      <UserListLayout>{userCards}</UserListLayout>
+      <div>listState is: {listState}</div>
+      <StyledUserList>{userCards}</StyledUserList>
     </div>
   );
 }

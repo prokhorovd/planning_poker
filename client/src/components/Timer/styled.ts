@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const TimerWrapper = styled.div`
+export const StyledTimerWrapper = styled.div`
   margin-top: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `
 
-export const ClockWrapper = styled.div`
+export const StyledClockWrapper = styled.div`
   height: 60px;
   width: 110px;
   display: flex;
