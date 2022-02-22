@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyledApp } from './styled';
-// import Header from './components/Header/Header';
+import Header from './components/Header/Header';
 // import CreateRoomForm from './components/CreateRoomForm/CreateRoomForm';
 // import IconPicker from './components/IconPicker/IconPicker';
 // import Timer from './components/Timer/Timer';
@@ -12,7 +12,7 @@ import { dataForUserListComponent, stateForUserListComponent } from './mocks';
 function App() {
   return (
     <StyledApp>
-      {/*<Header />*/}
+      <Header />
       {/*<IconPicker />*/}
       {/*<CreateRoomForm />*/}
       {/* listState can be: idle/vote/voted, description in component */}

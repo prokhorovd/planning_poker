@@ -13,7 +13,7 @@ export const StyledHeaderLogo = styled.div`
   margin: 30px;
   width: 45px;
   height: 45px;
-  background: url(${process.env.PUBLIC_URL + 'game-logo.png'}) center no-repeat ${EMOJI_BACKGROUND};
+  background: url("./assets/images/game-logo.png") center no-repeat ${EMOJI_BACKGROUND};
   border-radius: 15px;
 `
 
