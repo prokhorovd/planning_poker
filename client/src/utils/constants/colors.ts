@@ -12,7 +12,7 @@ export const CARD_SELECTED = '#CAEECC';
 export const CARD_SELECTED_HOVER = '#CAEECC';
 
 // CreateRoomForm
-export const SUBMIT_BUTTON_BACKGROUND = '#FFFFFF';
+export const SUBMIT_BUTTON_BACKGROUND = '#000000';
 export const SUBMIT_BUTTON_BACKGROUND_HOVER = '#5F5F5F';
 export const SUBMIT_BUTTON_ICON = '#FFFFFF';
 export const ERROR_COLOR = '#CD5C5CFF';
