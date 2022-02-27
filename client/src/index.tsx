@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import reportWebVitals from './reportWebVitals';
-import App from './App';
 import {createGlobalStyle, ThemeProvider} from 'styled-components';
 import theme from './theme';
+import { BrowserRouter } from 'react-router-dom';
+import Routing from './components/router/Routing/Routing';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -18,10 +19,12 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <GlobalStyle/>
-      <App />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle/>
+          <Routing/>
+      </ThemeProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
