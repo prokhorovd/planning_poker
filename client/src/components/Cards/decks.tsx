@@ -5,14 +5,14 @@ export enum CardType {
   Emoji = 'emoji'
 }
 
-export interface CardData {
+export interface CardItem {
   value: number | string,
   type: CardType,
   active?: boolean,
   setActiveCard?: (cardName: string | number) => void,
 }
 
-export const fibonacciDeck: CardData[] = [
+export const fibonacciDeck: CardItem[] = [
   {
     value: 1,
     type: CardType.Number,

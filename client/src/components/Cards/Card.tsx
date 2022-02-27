@@ -1,22 +1,26 @@
 import React, {FC} from 'react';
-import {CardData} from './decks';
-import { StyledCardItem, StyledCardItemActive } from './styled';
-import { Emoji } from 'emoji-mart';
+import {CardItem, CardType} from './decks';
+import {StyledCardItem, StyledCardItemActive} from './styled';
+import {Emoji} from 'emoji-mart';
 
-const Card:FC<CardData> = (cardData) => {
-  const {setActiveCard, value, type, active} = cardData;
+interface Props {
+  data: CardItem,
+}
+
+const Card:FC<Props> = ({data}) => {
+  const {setActiveCard, value, type, active} = data;
   if (setActiveCard !== undefined && active) {
     return (
       <StyledCardItemActive onClick={() => setActiveCard(value)}>
-        {type === 'emoji' && <Emoji emoji={value.toString()} size={28}/>}
-        {type === 'number' && value}
+        {type === CardType.Emoji && <Emoji emoji={value.toString()} size={28}/>}
+        {type === CardType.Number && value}
       </StyledCardItemActive>
     );
   } else if (setActiveCard !== undefined) {
     return (
       <StyledCardItem onClick={() => setActiveCard(value)}>
-        {type === 'emoji' && <Emoji emoji={value.toString()} size={28}/>}
-        {type === 'number' && value}
+        {type === CardType.Emoji && <Emoji emoji={value.toString()} size={28}/>}
+        {type === CardType.Number && value}
       </StyledCardItem>
     );
   }
