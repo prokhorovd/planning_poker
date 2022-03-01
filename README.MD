@@ -11,3 +11,6 @@ Welcome to planning poker project.
 ## misc:
 - `npm run client:start` build client-side and run serve process for prod version
 - `npm run clean` to delete "build" folder
+- `npm run lint:eslint` to check project with eslint
+- `npm run lint:eslint:fix` to check project with eslint and fix errors
+- `npm run prettify` run prettier for client/src/ folder files
