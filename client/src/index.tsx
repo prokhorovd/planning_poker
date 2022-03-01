@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import reportWebVitals from './reportWebVitals';
-import {createGlobalStyle, ThemeProvider} from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import theme from './theme';
 import { BrowserRouter } from 'react-router-dom';
 import Routing from './components/router/Routing/Routing';
@@ -15,18 +15,18 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-`
+`;
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <GlobalStyle/>
-          <Routing/>
+        <GlobalStyle />
+        <Routing />
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want to start measuring performance in your app, pass a function

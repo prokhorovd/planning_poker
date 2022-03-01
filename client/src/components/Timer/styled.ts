@@ -5,7 +5,7 @@ export const StyledTimerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 export const StyledClockWrapper = styled.div`
   height: 60px;
@@ -13,4 +13,4 @@ export const StyledClockWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;

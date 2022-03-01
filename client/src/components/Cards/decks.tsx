@@ -1,15 +1,13 @@
-import React from 'react';
-
 export enum CardType {
   Number = 'number',
-  Emoji = 'emoji'
+  Emoji = 'emoji',
 }
 
 export interface CardItem {
-  value: number | string,
-  type: CardType,
-  active?: boolean,
-  setActiveCard?: (cardName: string | number) => void,
+  value: number | string;
+  type: CardType;
+  active?: boolean;
+  setActiveCard?: (cardName: string | number) => void;
 }
 
 export const fibonacciDeck: CardItem[] = [
@@ -52,5 +50,5 @@ export const fibonacciDeck: CardItem[] = [
   {
     value: 'coffee',
     type: CardType.Emoji,
-},
-]
+  },
+];

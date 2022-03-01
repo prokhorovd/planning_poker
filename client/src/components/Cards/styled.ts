@@ -20,7 +20,7 @@ export const StyledCardItem = styled.div`
   &:hover {
     background-color: ${CARD_UNSELECTED_HOVER};
   }
-`
+`;
 
 export const StyledCardItemActive = styled(StyledCardItem)`
   background-color: ${CARD_SELECTED};
@@ -28,11 +28,11 @@ export const StyledCardItemActive = styled(StyledCardItem)`
   &:hover {
     background-color: ${CARD_SELECTED_HOVER};
   }
-`
+`;
 
 export const StyledCardField = styled.div`
   width: 500px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-`
+`;
