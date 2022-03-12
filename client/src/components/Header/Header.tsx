@@ -3,21 +3,24 @@ import {
   StyledHeaderLayout,
   StyledHeaderLogo,
   StyledHeaderUserIcon,
-  StyledHeaderUserIconHidden,
+  // StyledHeaderUserIconHidden,
 } from './styled';
+import store from '../../stores/store';
+import { observer } from 'mobx-react-lite';
+import { Emoji } from 'emoji-mart';
 
-const Header: FC = () => {
-  const showUserIcon = false;
+const Header: FC = observer(() => {
+  const { userIcon } = store;
   return (
     <StyledHeaderLayout>
       <StyledHeaderLogo />
-      {showUserIcon ? (
-        <StyledHeaderUserIcon>icon</StyledHeaderUserIcon>
-      ) : (
-        <StyledHeaderUserIconHidden />
+      {userIcon && (
+        <StyledHeaderUserIcon>
+          <Emoji emoji={userIcon} size={24} />
+        </StyledHeaderUserIcon>
       )}
     </StyledHeaderLayout>
   );
-};
+});
 
 export default Header;
