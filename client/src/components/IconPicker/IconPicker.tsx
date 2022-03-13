@@ -5,7 +5,7 @@ import { StyledUserIconLayout, StyledUserIconEmoji } from './styled';
 import store from '../../stores/store';
 
 const IconPicker: FC = () => {
-  const {userIcon} = store;
+  const { userIcon } = store;
   const [showPicker, setShowPicker] = useState(false);
   const handleAddEmoji = (emoji: BaseEmoji) => {
     store.setUserIcon(emoji);
@@ -26,6 +26,20 @@ const IconPicker: FC = () => {
           title="Select your user icon"
           style={{ position: 'absolute', bottom: '20px', right: '20px' }}
           onSelect={handleAddEmoji}
+          recent={[
+            'teacher',
+            'student',
+            'mechanic',
+            'factory_worker',
+            'technologist',
+          ]}
+          emojisToShowFilter={(emoji) => {
+            const forbiddenEmojis = [
+              'Black Question Mark Ornament',
+              'Hot Beverage',
+            ];
+            return !(emoji.name && forbiddenEmojis.includes(emoji.name));
+          }}
         />
       )}
     </StyledUserIconLayout>
