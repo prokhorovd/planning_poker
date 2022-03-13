@@ -5,10 +5,10 @@ import { StyledUserIconLayout, StyledUserIconEmoji } from './styled';
 import store from '../../stores/store';
 
 const IconPicker: FC = () => {
-  const {userIcon, setUserIcon} = store;
+  const {userIcon} = store;
   const [showPicker, setShowPicker] = useState(false);
   const handleAddEmoji = (emoji: BaseEmoji) => {
-    setUserIcon(emoji);
+    store.setUserIcon(emoji);
     setShowPicker(false);
   };
   return (
