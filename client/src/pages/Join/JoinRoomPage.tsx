@@ -7,7 +7,7 @@ import {
 } from './styled';
 import JoinRoomForm from '../../components/JoinRoomForm/JoinRoomForm';
 
-const CreatePage: FC = () => {
+const JoinRoomPage: FC = () => {
   return (
     <StyledJoinPage>
       <StyledJoinPageHeading>Join room</StyledJoinPageHeading>
@@ -18,4 +18,4 @@ const CreatePage: FC = () => {
   );
 };
 
-export default CreatePage;
+export default JoinRoomPage;

@@ -7,7 +7,7 @@ import {
   StyledCreatePageLink,
 } from './styled';
 
-const CreatePage: FC = () => {
+const CreateRoomPage: FC = () => {
   return (
     <StyledCreatePage>
       <StyledCreatePageHeading>Create room</StyledCreatePageHeading>
@@ -23,4 +23,4 @@ const CreatePage: FC = () => {
   );
 };
 
-export default CreatePage;
+export default CreateRoomPage;
