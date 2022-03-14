@@ -21,7 +21,3 @@ export const StyledHeaderLogo = styled.div`
 export const StyledHeaderUserIcon = styled.div`
   margin: 30px;
 `;
-
-export const StyledHeaderUserIconHidden = styled.div`
-  display: none;
-`;
