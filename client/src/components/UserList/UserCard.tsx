@@ -7,15 +7,16 @@ import {
   StyledUserName,
 } from './styled';
 import { Emoji } from 'emoji-mart';
-import { UserData, UserListState } from './UserList';
+import { UserData } from './UserList';
+import store, { GameState } from '../../stores/store';
+import { observer } from 'mobx-react-lite';
 
 interface Props {
   userData: UserData;
 }
 
-export const UserCard: FC<Props> = ({ userData }) => {
-  const { listState } = userData;
-  if (listState === UserListState.Idle) {
+export const UserCard: FC<Props> = observer(({ userData }) => {
+  if (store.gameState === GameState.Idle) {
     // lobby room - show all users
     return (
       <StyledUserCard>
@@ -25,7 +26,7 @@ export const UserCard: FC<Props> = ({ userData }) => {
         <StyledUserName>{userData.userName}</StyledUserName>
       </StyledUserCard>
     );
-  } else if (listState === UserListState.Vote) {
+  } else if (store.gameState === GameState.Vote) {
     // vote process: blur icon if user didn't vote yet, else show green background
     return (
       <StyledUserCard>
@@ -55,4 +56,4 @@ export const UserCard: FC<Props> = ({ userData }) => {
       <StyledUserName>{userData.userName}</StyledUserName>
     </StyledUserCard>
   );
-};
+});
