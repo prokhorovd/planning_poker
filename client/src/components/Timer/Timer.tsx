@@ -1,10 +1,11 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { Button } from '@mui/material';
 import { StyledClockWrapper, StyledTimerWrapper } from './styled';
+import { observer } from 'mobx-react-lite';
+import store, { GameState } from '../../stores/store';
 
 const START_TIME = 4;
 
-const Timer: FC = () => {
+const Timer: FC = observer(() => {
   const [timeLeft, setTimeLeft] = useState(START_TIME);
   const timerIdRef = useRef<null | ReturnType<typeof setInterval>>(null);
   const startHandler = () => {
@@ -15,10 +16,14 @@ const Timer: FC = () => {
       }, 1000);
     }
   };
+  if (store.gameState === GameState.Vote) {
+    startHandler();
+  }
   const stopHandler = () => {
     if (!!timerIdRef.current) {
       clearInterval(timerIdRef.current);
       timerIdRef.current = null;
+      store.setGameState(GameState.Voted);
       console.log('Timer have stopped!');
     }
   };
@@ -43,10 +48,8 @@ const Timer: FC = () => {
   return (
     <StyledTimerWrapper>
       <StyledClockWrapper>{convertTime(timeLeft)}</StyledClockWrapper>
-      <Button onClick={startHandler}>start</Button>
-      <Button onClick={stopHandler}>stop</Button>
     </StyledTimerWrapper>
   );
-};
+});
 
 export default Timer;
