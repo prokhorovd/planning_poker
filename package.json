@@ -4,20 +4,45 @@
   "description": "",
   "main": "/server/app.tsx",
   "scripts": {
-    "client:serve" : "concurrently --kill-others-on-fail \"cd client && npm run serve\"",
-    "server:serve" : "concurrently --kill-others-on-fail \"cd server && npm run serve\"",
-    "serve" : "concurrently --kill-others-on-fail \"npm run client:serve\" \"npm run server:serve\"",
-    "client:build" : "concurrently --kill-others-on-fail \"npm run clean && cd client && npm run build\"",
+    "client:serve": "concurrently --kill-others-on-fail \"cd client && npm run serve\"",
+    "server:serve": "concurrently --kill-others-on-fail \"cd server && npm run serve\"",
+    "serve": "concurrently --kill-others-on-fail \"npm run client:serve\" \"npm run server:serve\"",
+    "client:build": "concurrently --kill-others-on-fail \"npm run clean && cd client && npm run build\"",
     "clean": "rm -rf client/build",
-    "client:start" : "concurrently --kill-others-on-fail \"npm run client:build && cd client && npm run serve -s build\"",
-    "server:start" : "concurrently --kill-others-on-fail \"cd server && npm run start\"",
-    "start" : "concurrently --kill-others-on-fail \"npm run server:start\" \"npm run client:build\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client:start": "concurrently --kill-others-on-fail \"npm run client:build && cd client && npm run serve -s build\"",
+    "server:start": "concurrently --kill-others-on-fail \"cd server && npm run start\"",
+    "start": "concurrently --kill-others-on-fail \"npm run server:start\" \"npm run client:build\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:eslint": "eslint ./client/src/ --ext .ts,.tsx",
+    "lint:eslint:fix": "eslint ./client/src/ --ext .ts,.tsx --fix",
+    "prettify": "prettier --write client/"
   },
   "author": "Dmitriy Prokhorov",
   "license": "ISC",
   "workspaces": [
     "client",
     "server"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.2",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.4",
+    "prettier": "^2.5.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "client/src/": [
+      "prettier-write"
+    ]
+  }
 }

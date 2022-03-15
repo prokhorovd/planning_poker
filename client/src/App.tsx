@@ -1,19 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import ServerTest from './components/ServerTest';
+import { StyledApp } from './styled';
+import Header from './components/Header/Header';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Welcome to react template blank page.
-        </p>
-        <ServerTest />
-      </header>
-    </div>
+    <StyledApp>
+      <Header />
+      <Outlet />
+    </StyledApp>
   );
 }
 
