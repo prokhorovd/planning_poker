@@ -1,5 +1,7 @@
 // App
 export const APP_BACKGROUND = '#FAFAFA';
+export const APP_BACKGROUND_PLAY = '#FFF8E1';
+export const APP_BACKGROUND_RESULT = '#E0F2F1';
 
 // Reusable
 export const EMOJI_BACKGROUND = 'rgba(158, 158, 158, 0.1)';
