@@ -18,3 +18,11 @@ export const SUBMIT_BUTTON_BACKGROUND = '#000000';
 export const SUBMIT_BUTTON_BACKGROUND_HOVER = '#5F5F5F';
 export const SUBMIT_BUTTON_ICON = '#FFFFFF';
 export const ERROR_COLOR = '#CD5C5CFF';
+
+// Game
+export const DESCRIPTION_TEXT_COLOR = '#9E9E9E';
+export const RESTART_BUTTON_ICON_COLOR = '#F44336';
+export const RESTART_BUTTON_BACKGROUND_COLOR = 'rgba(244, 67, 54, 0.15)';
+export const SAVE_BUTTON_ICON_COLOR = '#000000';
+export const SAVE_BUTTON_BACKGROUND_COLOR = 'rgba(158, 158, 158, 0.15)';
+export const BUTTON_HOVER_COLOR = '#CAEECC';

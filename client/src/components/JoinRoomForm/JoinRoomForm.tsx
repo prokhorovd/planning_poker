@@ -8,9 +8,11 @@ import {
   StyledCreateRoomForm,
   StyledCreateRoomFormError,
 } from './styled';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import store, { GameState, UserData } from '../../stores/store';
 
 const JoinRoomForm: FC = () => {
+  let navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const formik = useFormik({
     initialValues: {
@@ -31,7 +33,25 @@ const JoinRoomForm: FC = () => {
         .matches(/^[0-9]*$/gi, 'Please use digits only'),
     }),
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
+      const roomID = values.roomID;
+      const userIcon = String(store.userIcon);
+      if (!store.userIcon) {
+        console.log('icon is not set');
+        return;
+      } else if (store.roomData[roomID] === undefined) {
+        console.log('room with this id is not exist');
+        return;
+      }
+      // config user and add to room
+      const userData: UserData = {
+        userName: values.userName,
+        userEmoji: userIcon,
+        pickedCard: null,
+        isAdmin: false,
+      };
+      store.addUserToRoom(Number(roomID), userData);
+      store.setGameState(GameState.Idle);
+      navigate(`/room?id=${values.roomID}`, { replace: true });
     },
   });
   return (

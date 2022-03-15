@@ -12,7 +12,7 @@ const IconPicker: FC = () => {
   const { userIcon } = store;
   const [showPicker, setShowPicker] = useState(false);
   const handleAddEmoji = (emoji: BaseEmoji) => {
-    store.setUserIcon(emoji);
+    store.setUserIcon(emoji.id);
     setShowPicker(false);
   };
   return (

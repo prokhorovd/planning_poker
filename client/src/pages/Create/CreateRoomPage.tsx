@@ -6,6 +6,7 @@ import {
   StyledCreatePageHeading,
   StyledCreatePageLink,
 } from './styled';
+import store from '../../stores/store';
 
 const CreateRoomPage: FC = () => {
   return (
@@ -16,9 +17,21 @@ const CreateRoomPage: FC = () => {
       <StyledCreatePageLink to="/join">
         Join to the existing room
       </StyledCreatePageLink>
-      <StyledCreatePageLink to="/join?roomId=123456">
-        Join to room #123456
-      </StyledCreatePageLink>
+      {/* remove development block below on production */}
+      <div
+        style={{
+          marginTop: '80px',
+          display: 'flex',
+          flexDirection: 'column',
+          color: 'gray',
+        }}
+      >
+        <p>development info:</p>
+        {`gameState: ${store.gameState}`}
+        <StyledCreatePageLink to="/join?roomId=123123">
+          Invite link to Join Room #123123
+        </StyledCreatePageLink>
+      </div>
     </StyledCreatePage>
   );
 };

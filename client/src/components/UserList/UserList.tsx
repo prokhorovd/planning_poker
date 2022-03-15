@@ -1,20 +1,16 @@
 import React, { FC } from 'react';
 import { StyledUserList } from './styled';
 import { UserCard } from './UserCard';
-
-export interface UserData {
-  userName: string;
-  userEmoji: string;
-  pickedCard: null | string;
-}
+import store, { UserData } from '../../stores/store';
 
 interface UserListProps {
-  listData: UserData[];
+  roomID: number;
 }
 
-const UserList: FC<UserListProps> = ({ listData }) => {
+const UserList: FC<UserListProps> = ({ roomID }) => {
+  const userList = store.roomData[roomID].userList;
   // make list of user cards
-  const userCards = listData.map((element) => {
+  const userCards = userList.map((element: UserData) => {
     const args = {
       ...element,
     };

@@ -8,8 +8,20 @@ import {
   StyledCreateRoomForm,
   StyledCreateRoomFormError,
 } from './styled';
+import store, { GameState } from '../../stores/store';
+import { useNavigate } from 'react-router-dom';
+import { dataForUserListComponent } from '../../mocks';
+
+const generateRoomID = () => {
+  let roomID: number;
+  do {
+    roomID = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+  } while (Object.keys(store.roomData).includes(`${roomID}`));
+  return roomID;
+};
 
 const CreateRoomForm: FC = () => {
+  let navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       userName: '',
@@ -32,7 +44,25 @@ const CreateRoomForm: FC = () => {
         ),
     }),
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
+      // stop submit if userIcon is not set
+      if (!store.userIcon) {
+        return;
+      }
+      // create room with params
+      const roomID = generateRoomID();
+      const roomParams = {
+        id: roomID,
+        roomName: values.roomName,
+        adminName: values.userName,
+        adminAvatar: store.userIcon,
+      };
+      store.createRoom(roomParams);
+      store.setGameState(GameState.Idle);
+      // DEVELOPMENT: fill store with user data
+      dataForUserListComponent.map((user) => {
+        store.addUserToRoom(roomID, user);
+      });
+      navigate(`/room?id=${roomID}`, { replace: true });
     },
   });
   return (

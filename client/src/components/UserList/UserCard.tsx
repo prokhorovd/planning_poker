@@ -7,8 +7,7 @@ import {
   StyledUserName,
 } from './styled';
 import { Emoji } from 'emoji-mart';
-import { UserData } from './UserList';
-import store, { GameState } from '../../stores/store';
+import store, { GameState, UserData } from '../../stores/store';
 import { observer } from 'mobx-react-lite';
 
 interface Props {

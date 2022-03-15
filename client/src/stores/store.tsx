@@ -1,5 +1,4 @@
 import { action, makeAutoObservable, observable } from 'mobx';
-import { BaseEmoji } from 'emoji-mart';
 
 export enum GameState {
   Login = 'login',
@@ -8,16 +7,30 @@ export enum GameState {
   Voted = 'voted',
 }
 
+export interface UserData {
+  userName: string;
+  userEmoji: string;
+  pickedCard: string | null | number;
+  isAdmin: boolean;
+}
+
+interface RoomParameters {
+  id: number;
+  roomName: string;
+  adminName: string;
+  adminAvatar: string;
+}
+
 class Store {
   constructor() {
     makeAutoObservable(this);
   }
 
   @observable
-  userIcon: null | BaseEmoji = null;
+  userIcon: null | string = null;
 
   @action
-  setUserIcon(emoji: BaseEmoji) {
+  setUserIcon(emoji: string | null) {
     this.userIcon = emoji;
   }
 
@@ -27,6 +40,80 @@ class Store {
   @action
   setGameState(state: GameState) {
     this.gameState = state;
+  }
+
+  @observable
+  userName: string = '';
+
+  @action
+  setUserName(name: string) {
+    this.userName = name;
+  }
+
+  @observable
+  roomName: string = '';
+
+  @action
+  setRoomName(name: string) {
+    this.roomName = name;
+  }
+
+  @observable
+  roomID: number | null = null;
+
+  @action
+  setRoomID(roomID: number) {
+    this.roomID = roomID;
+  }
+
+  @observable
+  roomData: any = {
+    123123: {
+      roomID: 123123,
+      roomName: 'TestRoom',
+      userList: [
+        {
+          userName: 'Admin',
+          userEmoji: 'santa',
+          pickedCard: null,
+          isAdmin: true,
+        },
+        {
+          userName: 'User2',
+          userEmoji: 'smiley',
+          pickedCard: null,
+          isAdmin: false,
+        },
+      ],
+    },
+  };
+  @action
+  createRoom(roomParameters: RoomParameters) {
+    const { id, roomName, adminName, adminAvatar } = roomParameters;
+    this.roomData[id] = {
+      roomID: id,
+      roomName,
+      userList: [
+        {
+          userName: adminName,
+          userEmoji: adminAvatar,
+          pickedCard: null,
+          isAdmin: true,
+        },
+      ],
+    };
+  }
+  @action
+  addUserToRoom(roomId: number, userData: UserData) {
+    this.roomData[roomId].userList.push(userData);
+  }
+  @action
+  pickCard(
+    roomId: number,
+    userName: string,
+    pickedCard: string | number | null,
+  ) {
+    this.roomData[roomId].userList[0].pickedCard = pickedCard;
   }
 }
 

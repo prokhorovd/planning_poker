@@ -1,30 +1,36 @@
-import { UserData } from './components/UserList/UserList';
-
 // temp data for UserList component testing purposes
+import { UserData } from './stores/store';
+import React from 'react';
+
 export const dataForUserListComponent: UserData[] = [
   {
     userName: 'User1',
     userEmoji: 'santa',
-    pickedCard: null,
+    pickedCard: '13',
+    isAdmin: false,
   },
   {
     userName: 'User2',
-    userEmoji: 'technologist',
+    userEmoji: 'sleepy',
     pickedCard: null,
+    isAdmin: false,
   },
   {
     userName: 'User3',
     userEmoji: 'smiley',
     pickedCard: '3',
+    isAdmin: false,
   },
   {
     userName: 'User4',
-    userEmoji: 'smiley',
+    userEmoji: 'sunglasses',
     pickedCard: null,
+    isAdmin: false,
   },
   {
     userName: 'User5',
-    userEmoji: 'smiley',
+    userEmoji: 'innocent',
     pickedCard: '5',
+    isAdmin: false,
   },
 ];
