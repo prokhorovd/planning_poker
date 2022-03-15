@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
-import { StyledClockWrapper, StyledTimerWrapper } from './styled';
-import { observer } from 'mobx-react-lite';
-import store, { GameState } from '../../stores/store';
+import React, {FC, useEffect, useRef, useState} from 'react';
+import {StyledClockWrapper, StyledTimerWrapper} from './styled';
+import {observer} from 'mobx-react-lite';
+import store, {GameState} from '../../stores/store';
 
 const START_TIME = 4;
 
@@ -24,6 +24,7 @@ const Timer: FC = observer(() => {
       clearInterval(timerIdRef.current);
       timerIdRef.current = null;
       store.setGameState(GameState.Voted);
+      // setTimeLeft(START_TIME);
       console.log('Timer have stopped!');
     }
   };
@@ -44,6 +45,9 @@ const Timer: FC = observer(() => {
       result.seconds = '0' + result.seconds;
     }
     return `${result.minutes} : ${result.seconds}`;
+  }
+  if (store.gameState === GameState.Idle && timeLeft !== START_TIME) {
+    setTimeLeft(START_TIME);
   }
   return (
     <StyledTimerWrapper>
