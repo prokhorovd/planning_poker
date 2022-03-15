@@ -1,8 +1,12 @@
 import styled from 'styled-components';
-import store, {GameState} from './stores/store';
-import {APP_BACKGROUND, APP_BACKGROUND_PLAY, APP_BACKGROUND_RESULT} from './utils/constants/colors';
+import store, { GameState } from './stores/store';
+import {
+  APP_BACKGROUND,
+  APP_BACKGROUND_PLAY,
+  APP_BACKGROUND_RESULT,
+} from './utils/constants/colors';
 
-export function defineBackgroundColor(gameState: GameState){
+export function defineBackgroundColor(gameState: GameState) {
   let appBackground;
   if (gameState === GameState.Vote) {
     appBackground = APP_BACKGROUND_PLAY;

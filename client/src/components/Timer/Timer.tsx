@@ -1,7 +1,7 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
-import {StyledClockWrapper, StyledTimerWrapper} from './styled';
-import {observer} from 'mobx-react-lite';
-import store, {GameState} from '../../stores/store';
+import React, { FC, useEffect, useRef, useState } from 'react';
+import { StyledClockWrapper, StyledTimerWrapper } from './styled';
+import { observer } from 'mobx-react-lite';
+import store, { GameState } from '../../stores/store';
 
 const START_TIME = 4;
 
