@@ -45,7 +45,24 @@ export const UserCard: FC<Props> = observer(({ user }) => {
         </StyledUserCard>
       );
     default:
-      // show picked card or emoji if user hasn't voted;
+      // show emoji-card picked by user or user emoji if user hasn't voted
+      if (isNaN(Number(user.pickedCard))) {
+        return (
+          <StyledUserCard>
+            {user.pickedCard ? (
+              <StyledUserIcon>
+                <Emoji emoji={String(user.pickedCard)} size={24} />
+              </StyledUserIcon>
+            ) : (
+              <StyledUserIconNotVoted>
+                <Emoji emoji={userEmoji} size={24} />
+              </StyledUserIconNotVoted>
+            )}
+            <StyledUserName>{user.userName}</StyledUserName>
+          </StyledUserCard>
+        );
+      }
+      // show number card picked by user or user-emoji if user hasn't voted;
       return (
         <StyledUserCard>
           {user.pickedCard ? (
