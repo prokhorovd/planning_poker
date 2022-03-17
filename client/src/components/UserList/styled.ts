@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
-  EMOJI_BACKGROUND,
-  EMOJI_BACKGROUND_SELECTED,
+  silverChalice10,
+  peppermint,
 } from '../../utils/constants/colors';
 
 export const StyledUserList = styled.div`
@@ -24,12 +24,12 @@ export const StyledUserIcon = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: ${EMOJI_BACKGROUND};
+  background-color: ${silverChalice10};
   border-radius: 25px;
 `;
 
 export const StyledUserIconVoted = styled(StyledUserIcon)`
-  background-color: ${EMOJI_BACKGROUND_SELECTED};
+  background-color: ${peppermint};
 `;
 
 export const StyledUserIconNotVoted = styled(StyledUserIcon)`

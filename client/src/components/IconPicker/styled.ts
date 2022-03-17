@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { EMOJI_BACKGROUND } from '../../utils/constants/colors';
+import { silverChalice10 } from '../../utils/constants/colors';
 
 export const StyledIconPicker = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ export const StyledUserIconLayout = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: ${EMOJI_BACKGROUND};
+  background-color: ${silverChalice10};
   border-radius: 25px;
   margin-bottom: 5px;
 `;

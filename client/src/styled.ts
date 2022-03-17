@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 import { GameState } from './stores/store';
 import {
-  APP_BACKGROUND,
-  APP_BACKGROUND_PLAY,
-  APP_BACKGROUND_RESULT,
+  alabaster,
+  ginFizz,
+  aquaSqueeze,
 } from './utils/constants/colors';
 
 export function defineBackgroundColor(gameState: GameState) {
   let appBackground;
   if (gameState === GameState.Vote) {
-    appBackground = APP_BACKGROUND_PLAY;
+    appBackground = ginFizz;
   } else if (gameState === GameState.Voted) {
-    appBackground = APP_BACKGROUND_RESULT;
+    appBackground = aquaSqueeze;
   } else {
-    appBackground = APP_BACKGROUND;
+    appBackground = alabaster;
   }
   return appBackground;
 }

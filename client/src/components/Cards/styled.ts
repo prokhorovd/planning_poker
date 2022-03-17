@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import {
-  CARD_UNSELECTED,
-  CARD_SELECTED,
-  CARD_SELECTED_HOVER,
-  CARD_UNSELECTED_HOVER,
+  white,
+  peppermint,
+  panache,
 } from '../../utils/constants/colors';
 
 export const StyledCardItem = styled.div`
@@ -11,22 +10,22 @@ export const StyledCardItem = styled.div`
   height: 145px;
   width: 90px;
   font-size: 24px;
-  background-color: ${CARD_UNSELECTED};
+  background-color: ${white};
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
   transition: 100ms;
   &:hover {
-    background-color: ${CARD_UNSELECTED_HOVER};
+    background-color: ${panache};
   }
 `;
 
 export const StyledCardItemActive = styled(StyledCardItem)`
-  background-color: ${CARD_SELECTED};
+  background-color: ${peppermint};
 
   &:hover {
-    background-color: ${CARD_SELECTED_HOVER};
+    background-color: ${peppermint};
   }
 `;
 

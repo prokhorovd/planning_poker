@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { IconButton } from '@mui/material';
 import {
-  BUTTON_HOVER_COLOR,
-  RESTART_BUTTON_BACKGROUND_COLOR,
-  RESTART_BUTTON_ICON_COLOR,
-  SAVE_BUTTON_BACKGROUND_COLOR,
-  SAVE_BUTTON_ICON_COLOR,
+  peppermint,
+  pomegranate15,
+  pomegranate,
+  silverChalice15,
+  black,
 } from '../../utils/constants/colors';
 import DeleteOutline from '@mui/icons-material/DeleteOutline';
 import Save from '@mui/icons-material/Save';
@@ -17,33 +17,33 @@ export const StyledResult = styled('div')`
 `;
 
 export const StyledRestartButton = styled(IconButton)`
-  background-color: ${RESTART_BUTTON_BACKGROUND_COLOR};
+  background-color: ${pomegranate15};
   border-radius: 15px;
   width: 40px;
   height: 40px;
   align-self: center;
 
   :hover {
-    background-color: ${BUTTON_HOVER_COLOR};
+    background-color: ${peppermint};
 `;
 
 export const StyledRestartButtonIcon = styled(DeleteOutline)`
-  color: ${RESTART_BUTTON_ICON_COLOR};
+  color: ${pomegranate};
 `;
 
 export const StyledSaveButton = styled(IconButton)`
-  background-color: ${SAVE_BUTTON_BACKGROUND_COLOR};
+  background-color: ${silverChalice15};
   border-radius: 15px;
   width: 40px;
   height: 40px;
   align-self: center;
 
   :hover {
-    background-color: ${BUTTON_HOVER_COLOR};
+    background-color: ${peppermint};
 `;
 
 export const StyledSaveButtonIcon = styled(Save)`
-  color: ${SAVE_BUTTON_ICON_COLOR};
+  color: ${black};
 `;
 
 export const StyledButtonsWrapper = styled('div')`

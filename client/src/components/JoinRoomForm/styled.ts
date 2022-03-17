@@ -2,25 +2,25 @@ import styled from 'styled-components';
 import { IconButton } from '@mui/material';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import {
-  ERROR_COLOR,
-  SUBMIT_BUTTON_BACKGROUND,
-  SUBMIT_BUTTON_BACKGROUND_HOVER,
-  SUBMIT_BUTTON_ICON,
+  chestnutRose,
+  black,
+  scorpion,
+  white,
 } from '../../utils/constants/colors';
 
 export const StyledSubmitButton = styled(IconButton)`
-  background-color: ${SUBMIT_BUTTON_BACKGROUND};
+  background-color: ${black};
   margin-top: 20px;
   width: 60px;
   height: 60px;
   align-self: center;
 
   :hover {
-    background-color: ${SUBMIT_BUTTON_BACKGROUND_HOVER};
+    background-color: ${scorpion};
 `;
 
 export const StyledSubmitButtonIcon = styled(ArrowRightAltIcon)`
-  color: ${SUBMIT_BUTTON_ICON};
+  color: ${white};
 `;
 
 export const StyledCreateRoomForm = styled.form`
@@ -31,5 +31,5 @@ export const StyledCreateRoomForm = styled.form`
 
 export const StyledCreateRoomFormError = styled.div`
   font-size: 11px;
-  color: ${ERROR_COLOR};
+  color: ${chestnutRose};
 `;
