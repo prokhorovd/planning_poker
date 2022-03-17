@@ -31,7 +31,10 @@ const JoinRoomForm: FC = () => {
         .min(10, 'Room ID contain 10 characters')
         .max(10, 'Room ID contain 10 characters')
         .required('Required')
-        .matches(/^[A-Za-z0-9_-]*$/gi, 'Allowed characters are letters, numbers and symbols: \'_\' \'-\''),
+        .matches(
+          /^[A-Za-z0-9_-]*$/gi,
+          "Allowed characters are letters, numbers and symbols: '_' '-'",
+        ),
     }),
     onSubmit: (values) => {
       const roomID = values.roomID;

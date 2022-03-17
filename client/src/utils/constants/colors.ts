@@ -1,4 +1,3 @@
-
 export const alabaster = '#FAFAFA';
 export const ginFizz = '#FFF8E1';
 export const aquaSqueeze = '#E0F2F1';
@@ -13,4 +12,3 @@ export const scorpion = '#5F5F5F';
 export const chestnutRose = '#CD5C5CFF';
 export const pomegranate = '#F44336';
 export const pomegranate15 = 'rgba(244, 67, 54, 0.15)';
-

@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-import {
-  silverChalice10,
-  peppermint,
-} from '../../utils/constants/colors';
+import { silverChalice10, peppermint } from '../../utils/constants/colors';
 
 export const StyledUserList = styled.div`
   display: flex;

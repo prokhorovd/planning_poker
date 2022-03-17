@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import { GameState } from './stores/store';
-import {
-  alabaster,
-  ginFizz,
-  aquaSqueeze,
-} from './utils/constants/colors';
+import { alabaster, ginFizz, aquaSqueeze } from './utils/constants/colors';
 
 export function defineBackgroundColor(gameState: GameState) {
   let appBackground;

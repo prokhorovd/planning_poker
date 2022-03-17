@@ -1,9 +1,5 @@
 import styled from 'styled-components';
-import {
-  white,
-  peppermint,
-  panache,
-} from '../../utils/constants/colors';
+import { white, peppermint, panache } from '../../utils/constants/colors';
 
 export const StyledCardItem = styled.div`
   margin: 5px;
