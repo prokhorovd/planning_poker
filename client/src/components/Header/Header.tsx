@@ -7,14 +7,15 @@ import {
 import store from '../../stores/store';
 import { observer } from 'mobx-react-lite';
 import { Emoji } from 'emoji-mart';
-import { GameState } from '../../stores/store';
+import { useLocation } from 'react-router-dom';
 
 const Header: FC = observer(() => {
-  const { userIcon, gameState } = store;
+  const { userIcon } = store;
+  const location = useLocation();
   return (
     <StyledHeaderLayout>
       <StyledHeaderLogo />
-      {userIcon && gameState !== GameState.Login && (
+      {userIcon && location.pathname !== '/' && (
         <StyledHeaderUserIcon>
           <Emoji emoji={userIcon} size={24} />
         </StyledHeaderUserIcon>
