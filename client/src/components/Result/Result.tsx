@@ -12,7 +12,7 @@ import {
 import * as html2pdf from 'html2pdf.js';
 
 interface Props {
-  roomID: number;
+  roomID: string;
 }
 
 function printPage() {

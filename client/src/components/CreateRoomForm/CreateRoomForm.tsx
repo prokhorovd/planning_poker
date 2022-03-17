@@ -11,14 +11,7 @@ import {
 import store, { GameState } from '../../stores/store';
 import { useNavigate } from 'react-router-dom';
 import { dataForUserListComponent } from '../../mocks';
-
-const generateRoomID = () => {
-  let roomID: number;
-  do {
-    roomID = Math.floor(Math.random() * (999999 - 100000)) + 100000;
-  } while (Object.keys(store.roomData).includes(`${roomID}`));
-  return roomID;
-};
+import { nanoid } from 'nanoid';
 
 const CreateRoomForm: FC = () => {
   let navigate = useNavigate();
@@ -49,7 +42,7 @@ const CreateRoomForm: FC = () => {
         return;
       }
       // create room with params
-      const roomID = generateRoomID();
+      const roomID = nanoid(10);
       const roomParams = {
         id: roomID,
         roomName: values.roomName,

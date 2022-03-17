@@ -6,7 +6,7 @@ import store from '../../stores/store';
 
 interface Props {
   deck: CardItem[];
-  roomID: number;
+  roomID: string;
   userName: string;
 }
 

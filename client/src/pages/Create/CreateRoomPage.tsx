@@ -28,8 +28,8 @@ const CreateRoomPage: FC = () => {
       >
         <p>development info:</p>
         {`gameState: ${store.gameState}`}
-        <StyledCreatePageLink to="/join?roomId=123123">
-          Invite link to Join Room #123123
+        <StyledCreatePageLink to="/join?roomId=sdUGShS_2p">
+          Invite link to Join Room with id:sdUGShS_2p
         </StyledCreatePageLink>
       </div>
     </StyledCreatePage>

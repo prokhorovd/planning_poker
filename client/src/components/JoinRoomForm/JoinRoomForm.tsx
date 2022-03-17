@@ -28,9 +28,10 @@ const JoinRoomForm: FC = () => {
           "Please don't use special characters",
         ),
       roomID: Yup.string()
-        .max(6, 'Room ID contain 6 digits')
+        .min(10, 'Room ID contain 10 characters')
+        .max(10, 'Room ID contain 10 characters')
         .required('Required')
-        .matches(/^[0-9]*$/gi, 'Please use digits only'),
+        .matches(/^[A-Za-z0-9_-]*$/gi, 'Allowed characters are letters, numbers and symbols: \'_\' \'-\''),
     }),
     onSubmit: (values) => {
       const roomID = values.roomID;
@@ -49,7 +50,7 @@ const JoinRoomForm: FC = () => {
         pickedCard: null,
         isAdmin: false,
       };
-      store.addUserToRoom(Number(roomID), userData);
+      store.addUserToRoom(roomID, userData);
       store.setGameState(GameState.Idle);
       navigate(`/room?id=${values.roomID}`, { replace: true });
     },

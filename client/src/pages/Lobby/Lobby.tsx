@@ -16,7 +16,7 @@ import { fibonacciDeck } from '../../components/Cards/decks';
 import Result from '../../components/Result/Result';
 
 interface Props {
-  roomId: number;
+  roomId: string;
 }
 
 function copyLink(linkText: string) {
@@ -24,7 +24,7 @@ function copyLink(linkText: string) {
 }
 
 const Lobby: FC<Props> = observer(({ roomId }) => {
-  const link: string = `${window.location.host}/join?id=${roomId}`;
+  const link: string = `${window.location.host}/join?roomId=${roomId}`;
   return (
     <StyledLobby>
       <h1>

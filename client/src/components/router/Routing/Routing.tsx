@@ -8,7 +8,7 @@ import Lobby from '../../../pages/Lobby/Lobby';
 
 const Routing: FC = () => {
   let [searchParams] = useSearchParams();
-  const roomId = Number(searchParams.get('id'));
+  const roomId = String(searchParams.get('id'));
   return (
     <Routes>
       <Route path="/" element={<App />}>

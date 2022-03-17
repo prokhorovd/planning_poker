@@ -15,7 +15,7 @@ export interface UserData {
 }
 
 interface RoomParameters {
-  id: number;
+  id: string;
   roomName: string;
   adminName: string;
   adminAvatar: string;
@@ -68,8 +68,8 @@ class Store {
 
   @observable
   roomData: any = {
-    123123: {
-      roomID: 123123,
+    sdUGShS_2p: {
+      roomID: 'sdUGShS_2p',
       roomName: 'TestRoom',
       userList: [
         {
@@ -104,12 +104,12 @@ class Store {
     };
   }
   @action
-  addUserToRoom(roomId: number, userData: UserData) {
+  addUserToRoom(roomId: string, userData: UserData) {
     this.roomData[roomId].userList.push(userData);
   }
   @action
   pickCard(
-    roomId: number,
+    roomId: string,
     userName: string,
     pickedCard: string | number | null,
   ) {

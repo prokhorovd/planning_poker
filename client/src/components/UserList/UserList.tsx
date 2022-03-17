@@ -4,7 +4,7 @@ import { UserCard } from './UserCard';
 import store, { UserData } from '../../stores/store';
 
 interface UserListProps {
-  roomID: number;
+  roomID: string;
 }
 
 const UserList: FC<UserListProps> = ({ roomID }) => {
