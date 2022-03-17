@@ -38,11 +38,12 @@ const Result: FC<Props> = ({ roomID }) => {
       votedUsers += 1;
     }
   });
+  const averageResult = (totalScore / votedUsers).toFixed(2);
   return (
     <StyledResult>
       <p>
         <b>{votedUsers}</b> users voted. Avg:{' '}
-        <b>{(totalScore / votedUsers).toFixed(2)}</b>
+        {isNaN(Number(averageResult)) ? <b>0</b> : <b>{averageResult}</b>}
       </p>
       {store.currentUser.admin && (
         <StyledButtonsWrapper>
