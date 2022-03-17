@@ -14,6 +14,7 @@ import {
 import Cards from '../../components/Cards/Cards';
 import { fibonacciDeck } from '../../components/Cards/decks';
 import Result from '../../components/Result/Result';
+import { nanoid } from 'nanoid';
 
 interface Props {
   roomId: string;
@@ -69,12 +70,26 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
           to="/"
           onClick={() => {
             store.setGameState(GameState.Login);
-            store.setUserIcon(null);
+            store.setCurrentUser('', false);
+            store.setCurrentUserEmoji('');
           }}
         >
           Create the new room
         </Link>
         {`gamestate is: ${store.gameState}`}
+        <button
+          onClick={() =>
+            store.addUserToRoom(roomId, {
+              userName: nanoid(4),
+              userEmoji: 'santa',
+              pickedCard: Math.floor(Math.random() * (37 - 1)) + 1,
+              admin: false,
+            })
+          }
+        >
+          add user
+        </button>
+        <div>current user: {store.currentUser.userName}</div>
       </div>
     </StyledLobby>
   );
