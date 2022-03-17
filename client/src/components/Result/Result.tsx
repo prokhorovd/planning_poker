@@ -10,6 +10,7 @@ import {
 } from './styled';
 // @ts-ignore
 import * as html2pdf from 'html2pdf.js';
+import { observer } from 'mobx-react-lite';
 
 interface Props {
   roomID: string;
@@ -52,4 +53,4 @@ const Result: FC<Props> = ({ roomID }) => {
   );
 };
 
-export default Result;
+export default observer(Result);
