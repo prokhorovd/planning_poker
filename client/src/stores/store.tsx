@@ -7,7 +7,7 @@ export enum GameState {
   Voted = 'voted',
 }
 
-export interface UserData {
+export interface User {
   userName: string | null;
   userEmoji: string | null;
   pickedCard: string | null | number;
@@ -35,7 +35,7 @@ class Store {
   }
 
   @observable
-  currentUser: UserData = {
+  currentUser: User = {
     userName: null,
     userEmoji: null,
     pickedCard: null,
@@ -89,8 +89,8 @@ class Store {
     };
   }
   @action
-  addUserToRoom(roomId: string, userData: UserData) {
-    this.roomData[roomId].userList.push(userData);
+  addUserToRoom(roomId: string, user: User) {
+    this.roomData[roomId].userList.push(user);
   }
   @action
   pickCard(
@@ -98,7 +98,7 @@ class Store {
     userName: string | null,
     pickedCard: string | number | null,
   ) {
-    this.roomData[roomId].userList.map((user: UserData) => {
+    this.roomData[roomId].userList.map((user: User) => {
       if (user.userName === userName) {
         // find user in userList array
         const index = this.roomData[roomId].userList.indexOf(user);

@@ -7,15 +7,15 @@ import {
   StyledUserName,
 } from './styled';
 import { Emoji } from 'emoji-mart';
-import store, { GameState, UserData } from '../../stores/store';
+import store, { GameState, User } from '../../stores/store';
 import { observer } from 'mobx-react-lite';
 
 interface Props {
-  userData: UserData;
+  user: User;
 }
 
-export const UserCard: FC<Props> = observer(({ userData }) => {
-  let { userEmoji } = userData;
+export const UserCard: FC<Props> = observer(({ user }) => {
+  let { userEmoji } = user;
   if (!userEmoji) userEmoji = 'santa';
   switch (store.gameState) {
     case GameState.Idle:
@@ -25,14 +25,14 @@ export const UserCard: FC<Props> = observer(({ userData }) => {
           <StyledUserIcon>
             <Emoji emoji={userEmoji} size={24} />
           </StyledUserIcon>
-          <StyledUserName>{userData.userName}</StyledUserName>
+          <StyledUserName>{user.userName}</StyledUserName>
         </StyledUserCard>
       );
     case GameState.Vote:
       // highlight userEmoji if user have voted
       return (
         <StyledUserCard>
-          {userData.pickedCard ? (
+          {user.pickedCard ? (
             <StyledUserIconVoted>
               <Emoji emoji={userEmoji} size={24} />
             </StyledUserIconVoted>
@@ -41,21 +41,21 @@ export const UserCard: FC<Props> = observer(({ userData }) => {
               <Emoji emoji={userEmoji} size={24} />
             </StyledUserIconNotVoted>
           )}
-          <StyledUserName>{userData.userName}</StyledUserName>
+          <StyledUserName>{user.userName}</StyledUserName>
         </StyledUserCard>
       );
     default:
       // show picked card or emoji if user hasn't voted;
       return (
         <StyledUserCard>
-          {userData.pickedCard ? (
-            <StyledUserIcon>{userData.pickedCard}</StyledUserIcon>
+          {user.pickedCard ? (
+            <StyledUserIcon>{user.pickedCard}</StyledUserIcon>
           ) : (
             <StyledUserIconNotVoted>
               <Emoji emoji={userEmoji} size={24} />
             </StyledUserIconNotVoted>
           )}
-          <StyledUserName>{userData.userName}</StyledUserName>
+          <StyledUserName>{user.userName}</StyledUserName>
         </StyledUserCard>
       );
   }

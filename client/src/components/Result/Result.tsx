@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import store, { GameState, UserData } from '../../stores/store';
+import store, { GameState, User } from '../../stores/store';
 import {
   StyledButtonsWrapper,
   StyledRestartButton,
@@ -23,7 +23,7 @@ function printPage() {
 
 function restartGame(roomId: string) {
   store.setGameState(GameState.Idle);
-  store.roomData[roomId].userList.map((user: UserData) => {
+  store.roomData[roomId].userList.map((user: User) => {
     store.pickCard(roomId, user.userName, null);
   });
 }
@@ -32,9 +32,9 @@ const Result: FC<Props> = ({ roomID }) => {
   const userList = store.roomData[roomID].userList;
   let totalScore = 0;
   let votedUsers = 0;
-  userList.map((element: UserData) => {
-    if (Number(element.pickedCard)) {
-      totalScore += Number(element.pickedCard);
+  userList.map((user: User) => {
+    if (Number(user.pickedCard)) {
+      totalScore += Number(user.pickedCard);
       votedUsers += 1;
     }
   });

@@ -9,7 +9,7 @@ import {
   StyledCreateRoomFormError,
 } from './styled';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import store, { GameState, UserData } from '../../stores/store';
+import store, { GameState, User } from '../../stores/store';
 
 const JoinRoomForm: FC = () => {
   let navigate = useNavigate();
@@ -48,14 +48,14 @@ const JoinRoomForm: FC = () => {
       }
       // config user and add to room
       const { userName } = values;
-      const userData: UserData = {
+      const user: User = {
         userName,
         userEmoji,
         pickedCard: null,
         admin: false,
       };
       store.setCurrentUser(userName, false);
-      store.addUserToRoom(roomID, userData);
+      store.addUserToRoom(roomID, user);
       store.setGameState(GameState.Idle);
       navigate(`/room?id=${values.roomID}`, { replace: true });
     },
