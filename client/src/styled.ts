@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import store, { GameState } from './stores/store';
+import { GameState } from './stores/store';
 import {
   APP_BACKGROUND,
   APP_BACKGROUND_PLAY,
@@ -18,11 +18,15 @@ export function defineBackgroundColor(gameState: GameState) {
   return appBackground;
 }
 
+interface Props {
+  gameState: GameState;
+}
+
 export const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
   font-size: calc(10px + 1vmin);
-  background: ${defineBackgroundColor(store.gameState)};
+  background: ${({ gameState }: Props) => defineBackgroundColor(gameState)};
 `;
