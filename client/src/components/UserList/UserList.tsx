@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { StyledUserList } from './styled';
 import { UserCard } from './UserCard';
 import store, { UserData } from '../../stores/store';
-import {observer} from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite';
 
 interface UserListProps {
   roomID: string;

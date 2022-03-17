@@ -10,7 +10,6 @@ import {
 } from './styled';
 import store, { GameState } from '../../stores/store';
 import { useNavigate } from 'react-router-dom';
-import { dataForUserListComponent } from '../../mocks';
 import { nanoid } from 'nanoid';
 
 const CreateRoomForm: FC = () => {
@@ -37,24 +36,23 @@ const CreateRoomForm: FC = () => {
         ),
     }),
     onSubmit: (values) => {
-      // stop submit if userIcon is not set
-      if (!store.userIcon) {
+      const { userEmoji } = store.currentUser;
+      // stop submit if user emoji is not set
+      if (!userEmoji) {
         return;
       }
       // create room with params
       const roomID = nanoid(10);
+      const { roomName, userName } = values;
       const roomParams = {
         id: roomID,
-        roomName: values.roomName,
-        adminName: values.userName,
-        adminAvatar: store.userIcon,
+        roomName,
+        userName,
+        userEmoji: userEmoji,
       };
+      store.setCurrentUser(userName, true);
       store.createRoom(roomParams);
       store.setGameState(GameState.Idle);
-      // DEVELOPMENT: fill store with user data
-      dataForUserListComponent.map((user) => {
-        store.addUserToRoom(roomID, user);
-      });
       navigate(`/room?id=${roomID}`, { replace: true });
     },
   });

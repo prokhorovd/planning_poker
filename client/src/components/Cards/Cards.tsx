@@ -7,11 +7,11 @@ import store from '../../stores/store';
 interface Props {
   deck: CardItem[];
   roomID: string;
-  userName: string;
 }
 
-const Cards: FC<Props> = ({ deck, roomID, userName }) => {
+const Cards: FC<Props> = ({ deck, roomID }) => {
   const [activeCard, setActiveCard] = useState<null | string | number>(null);
+  const { userName } = store.currentUser;
   const selectCard: (cardName: string | number) => void = (cardName) => {
     setActiveCard(cardName);
     store.pickCard(roomID, userName, cardName);

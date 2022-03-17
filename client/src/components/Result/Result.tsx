@@ -21,8 +21,11 @@ function printPage() {
   html2pdf(element);
 }
 
-function restartGame() {
+function restartGame(roomId: string) {
   store.setGameState(GameState.Idle);
+  store.roomData[roomId].userList.map((user: UserData) => {
+    store.pickCard(roomId, user.userName, null);
+  });
 }
 
 const Result: FC<Props> = ({ roomID }) => {
@@ -41,14 +44,16 @@ const Result: FC<Props> = ({ roomID }) => {
         <b>{votedUsers}</b> users voted. Avg:{' '}
         <b>{(totalScore / votedUsers).toFixed(2)}</b>
       </p>
-      <StyledButtonsWrapper>
-        <StyledRestartButton onClick={restartGame}>
-          <StyledRestartButtonIcon />
-        </StyledRestartButton>
-        <StyledSaveButton onClick={printPage}>
-          <StyledSaveButtonIcon />
-        </StyledSaveButton>
-      </StyledButtonsWrapper>
+      {store.currentUser.admin && (
+        <StyledButtonsWrapper>
+          <StyledRestartButton onClick={() => restartGame(roomID)}>
+            <StyledRestartButtonIcon />
+          </StyledRestartButton>
+          <StyledSaveButton onClick={printPage}>
+            <StyledSaveButtonIcon />
+          </StyledSaveButton>
+        </StyledButtonsWrapper>
+      )}
     </StyledResult>
   );
 };

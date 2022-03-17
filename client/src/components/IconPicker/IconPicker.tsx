@@ -9,18 +9,18 @@ import {
 import store from '../../stores/store';
 
 const IconPicker: FC = () => {
-  const { userIcon } = store;
+  const { userEmoji } = store.currentUser;
   const [showPicker, setShowPicker] = useState(false);
   const handleAddEmoji = (emoji: BaseEmoji) => {
-    store.setUserIcon(emoji.id);
+    store.setCurrentUserEmoji(emoji.id);
     setShowPicker(false);
   };
   return (
     <StyledIconPicker>
       <StyledUserIconLayout>
         <StyledUserIconEmoji onClick={() => setShowPicker(!showPicker)}>
-          {userIcon ? (
-            <Emoji emoji={userIcon} size={24} />
+          {userEmoji ? (
+            <Emoji emoji={userEmoji} size={24} />
           ) : (
             <Emoji emoji=":question:" set="apple" size={24} />
           )}
@@ -48,7 +48,7 @@ const IconPicker: FC = () => {
           />
         )}
       </StyledUserIconLayout>
-      {store.userIcon === null && 'Сlick above to select your avatar'}
+      {!userEmoji && 'Сlick above to select your avatar'}
     </StyledIconPicker>
   );
 };

@@ -32,8 +32,7 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
       </h1>
       <StyledDescription>
         {/*Temporary set to admin name, should depend on who visiting page*/}
-        Hi, <b>{store.roomData[roomId].userList[0].userName}</b>. Use this link
-        to invite others:
+        Hi, <b>{store.currentUser.userName}</b>. Use this link to invite others:
       </StyledDescription>
       <StyledLink>{link}</StyledLink>
       <button onClick={() => copyLink(link)}>Copy link to clipboard</button>
@@ -41,7 +40,7 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
       <UserList roomID={roomId} />
       {/* start game button: change gameState to vote and disappear*/}
       {/*should be visible to admin only*/}
-      {store.gameState === GameState.Idle && (
+      {store.gameState === GameState.Idle && store.currentUser.admin && (
         <StyledStartGameButton
           onClick={() => store.setGameState(GameState.Vote)}
         >
@@ -51,11 +50,7 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
       {/* cards block - shows when game started, disappear at the timer end */}
       {/*Username temporary set to admin name, should depend on who visiting page*/}
       {store.gameState === GameState.Vote && (
-        <Cards
-          deck={fibonacciDeck}
-          roomID={roomId}
-          userName={store.roomData[roomId].userList[0].userName}
-        />
+        <Cards deck={fibonacciDeck} roomID={roomId} />
       )}
       {/* result of the game, shows at the timer end */}
       {store.gameState === GameState.Voted && <Result roomID={roomId} />}

@@ -15,44 +15,48 @@ interface Props {
 }
 
 export const UserCard: FC<Props> = observer(({ userData }) => {
-  if (store.gameState === GameState.Idle) {
-    // lobby room - show all users
-    return (
-      <StyledUserCard>
-        <StyledUserIcon>
-          <Emoji emoji={userData.userEmoji} size={24} />
-        </StyledUserIcon>
-        <StyledUserName>{userData.userName}</StyledUserName>
-      </StyledUserCard>
-    );
-  } else if (store.gameState === GameState.Vote) {
-    // vote process: blur icon if user didn't vote yet, else show green background
-    return (
-      <StyledUserCard>
-        {userData.pickedCard ? (
-          <StyledUserIconVoted>
-            <Emoji emoji={userData.userEmoji} size={24} />
-          </StyledUserIconVoted>
-        ) : (
-          <StyledUserIconNotVoted>
-            <Emoji emoji={userData.userEmoji} size={24} />
-          </StyledUserIconNotVoted>
-        )}
-        <StyledUserName>{userData.userName}</StyledUserName>
-      </StyledUserCard>
-    );
+  let { userEmoji } = userData;
+  if (!userEmoji) userEmoji = 'santa';
+  switch (store.gameState) {
+    case GameState.Idle:
+      // show userEmoji
+      return (
+        <StyledUserCard>
+          <StyledUserIcon>
+            <Emoji emoji={userEmoji} size={24} />
+          </StyledUserIcon>
+          <StyledUserName>{userData.userName}</StyledUserName>
+        </StyledUserCard>
+      );
+    case GameState.Vote:
+      // highlight userEmoji if user have voted
+      return (
+        <StyledUserCard>
+          {userData.pickedCard ? (
+            <StyledUserIconVoted>
+              <Emoji emoji={userEmoji} size={24} />
+            </StyledUserIconVoted>
+          ) : (
+            <StyledUserIconNotVoted>
+              <Emoji emoji={userEmoji} size={24} />
+            </StyledUserIconNotVoted>
+          )}
+          <StyledUserName>{userData.userName}</StyledUserName>
+        </StyledUserCard>
+      );
+    default:
+      // show picked card or emoji if user hasn't voted;
+      return (
+        <StyledUserCard>
+          {userData.pickedCard ? (
+            <StyledUserIcon>{userData.pickedCard}</StyledUserIcon>
+          ) : (
+            <StyledUserIconNotVoted>
+              <Emoji emoji={userEmoji} size={24} />
+            </StyledUserIconNotVoted>
+          )}
+          <StyledUserName>{userData.userName}</StyledUserName>
+        </StyledUserCard>
+      );
   }
-  // result page: show users choice.
-  return (
-    <StyledUserCard>
-      {userData.pickedCard ? (
-        <StyledUserIcon>{userData.pickedCard}</StyledUserIcon>
-      ) : (
-        <StyledUserIconNotVoted>
-          <Emoji emoji={userData.userEmoji} size={24} />
-        </StyledUserIconNotVoted>
-      )}
-      <StyledUserName>{userData.userName}</StyledUserName>
-    </StyledUserCard>
-  );
 });

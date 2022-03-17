@@ -8,30 +8,22 @@ export enum GameState {
 }
 
 export interface UserData {
-  userName: string;
-  userEmoji: string;
+  userName: string | null;
+  userEmoji: string | null;
   pickedCard: string | null | number;
-  isAdmin: boolean;
+  admin: boolean;
 }
 
 interface RoomParameters {
   id: string;
   roomName: string;
-  adminName: string;
-  adminAvatar: string;
+  userName: string;
+  userEmoji: string;
 }
 
 class Store {
   constructor() {
     makeAutoObservable(this);
-  }
-
-  @observable
-  userIcon: null | string = null;
-
-  @action
-  setUserIcon(emoji: string | null) {
-    this.userIcon = emoji;
   }
 
   @observable
@@ -43,27 +35,20 @@ class Store {
   }
 
   @observable
-  userName: string = '';
-
+  currentUser: UserData = {
+    userName: null,
+    userEmoji: null,
+    pickedCard: null,
+    admin: false,
+  };
   @action
-  setUserName(name: string) {
-    this.userName = name;
+  setCurrentUser(name: string, admin: boolean) {
+    this.currentUser.userName = name;
+    this.currentUser.admin = admin;
   }
-
-  @observable
-  roomName: string = '';
-
   @action
-  setRoomName(name: string) {
-    this.roomName = name;
-  }
-
-  @observable
-  roomID: number | null = null;
-
-  @action
-  setRoomID(roomID: number) {
-    this.roomID = roomID;
+  setCurrentUserEmoji(emoji: string) {
+    this.currentUser.userEmoji = emoji;
   }
 
   @observable
@@ -76,29 +61,29 @@ class Store {
           userName: 'Admin',
           userEmoji: 'santa',
           pickedCard: null,
-          isAdmin: true,
+          admin: true,
         },
         {
           userName: 'User2',
           userEmoji: 'smiley',
           pickedCard: null,
-          isAdmin: false,
+          admin: false,
         },
       ],
     },
   };
   @action
   createRoom(roomParameters: RoomParameters) {
-    const { id, roomName, adminName, adminAvatar } = roomParameters;
+    const { id, roomName, userName, userEmoji } = roomParameters;
     this.roomData[id] = {
       roomID: id,
       roomName,
       userList: [
         {
-          userName: adminName,
-          userEmoji: adminAvatar,
+          userName,
+          userEmoji,
           pickedCard: null,
-          isAdmin: true,
+          admin: true,
         },
       ],
     };
@@ -110,10 +95,17 @@ class Store {
   @action
   pickCard(
     roomId: string,
-    userName: string,
+    userName: string | null,
     pickedCard: string | number | null,
   ) {
-    this.roomData[roomId].userList[0].pickedCard = pickedCard;
+    this.roomData[roomId].userList.map((user: UserData) => {
+      if (user.userName === userName) {
+        // find user in userList array
+        const index = this.roomData[roomId].userList.indexOf(user);
+        // register user vote
+        this.roomData[roomId].userList[index].pickedCard = pickedCard;
+      }
+    });
   }
 }
 

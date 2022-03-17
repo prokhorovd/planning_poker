@@ -38,8 +38,8 @@ const JoinRoomForm: FC = () => {
     }),
     onSubmit: (values) => {
       const roomID = values.roomID;
-      const userIcon = String(store.userIcon);
-      if (!store.userIcon) {
+      const { userEmoji } = store.currentUser;
+      if (!userEmoji) {
         console.log('icon is not set');
         return;
       } else if (store.roomData[roomID] === undefined) {
@@ -47,12 +47,14 @@ const JoinRoomForm: FC = () => {
         return;
       }
       // config user and add to room
+      const { userName } = values;
       const userData: UserData = {
-        userName: values.userName,
-        userEmoji: userIcon,
+        userName,
+        userEmoji,
         pickedCard: null,
-        isAdmin: false,
+        admin: false,
       };
+      store.setCurrentUser(userName, false);
       store.addUserToRoom(roomID, userData);
       store.setGameState(GameState.Idle);
       navigate(`/room?id=${values.roomID}`, { replace: true });

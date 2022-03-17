@@ -10,14 +10,14 @@ import { Emoji } from 'emoji-mart';
 import { useLocation } from 'react-router-dom';
 
 const Header: FC = observer(() => {
-  const { userIcon } = store;
+  const { userEmoji } = store.currentUser;
   const location = useLocation();
   return (
     <StyledHeaderLayout>
       <StyledHeaderLogo />
-      {userIcon && location.pathname !== '/' && (
+      {userEmoji && location.pathname !== '/' && location.pathname !== '/join' && (
         <StyledHeaderUserIcon>
-          <Emoji emoji={userIcon} size={24} />
+          <Emoji emoji={userEmoji} size={24} />
         </StyledHeaderUserIcon>
       )}
     </StyledHeaderLayout>
