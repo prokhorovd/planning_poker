@@ -52,7 +52,6 @@ const JoinRoomForm: FC = () => {
         userName,
         userEmoji,
         pickedCard: null,
-        admin: false,
       };
       store.setCurrentUser(userName, false);
       store.addUserToRoom(roomID, user);

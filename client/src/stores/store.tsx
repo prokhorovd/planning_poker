@@ -11,7 +11,7 @@ export interface User {
   userName: string | null;
   userEmoji: string | null;
   pickedCard: string | null | number;
-  admin: boolean;
+  admin?: boolean;
 }
 
 interface RoomParameters {
@@ -45,7 +45,6 @@ class Store {
     userName: null,
     userEmoji: null,
     pickedCard: null,
-    admin: false,
   };
   @action
   setCurrentUser(name: string, admin: boolean) {

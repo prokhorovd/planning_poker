@@ -84,7 +84,6 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
               userName: nanoid(4),
               userEmoji: 'santa',
               pickedCard: Math.floor(Math.random() * (37 - 1)) + 1,
-              admin: false,
             })
           }
         >
