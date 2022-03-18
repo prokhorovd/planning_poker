@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import { GameState } from './stores/store';
-import { alabaster, ginFizz, aquaSqueeze } from './utils/constants/colors';
+import colors from './utils/constants/colors';
 
 export function defineBackgroundColor(gameState: GameState) {
   let appBackground;
   if (gameState === GameState.Vote) {
-    appBackground = ginFizz;
+    appBackground = colors.ginFizz;
   } else if (gameState === GameState.Voted) {
-    appBackground = aquaSqueeze;
+    appBackground = colors.aquaSqueeze;
   } else {
-    appBackground = alabaster;
+    appBackground = colors.alabaster;
   }
   return appBackground;
 }

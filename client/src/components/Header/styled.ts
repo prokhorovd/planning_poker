@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { silverChalice10 } from '../../utils/constants/colors';
+import colors from '../../utils/constants/colors';
 
 export const StyledHeaderLayout = styled.div`
   width: 60vw;
@@ -14,7 +14,7 @@ export const StyledHeaderLogo = styled.div`
   width: 45px;
   height: 45px;
   background: url('assets/images/game-logo.png') center no-repeat
-    ${silverChalice10};
+    ${colors.silverChalice10};
   border-radius: 15px;
 `;
 

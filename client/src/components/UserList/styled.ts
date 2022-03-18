@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { silverChalice10, peppermint } from '../../utils/constants/colors';
+import colors from '../../utils/constants/colors';
 
 export const StyledUserList = styled.div`
   display: flex;
@@ -21,12 +21,12 @@ export const StyledUserIcon = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: ${silverChalice10};
+  background-color: ${colors.silverChalice10};
   border-radius: 25px;
 `;
 
 export const StyledUserIconVoted = styled(StyledUserIcon)`
-  background-color: ${peppermint};
+  background-color: ${colors.peppermint};
 `;
 
 export const StyledUserIconNotVoted = styled(StyledUserIcon)`

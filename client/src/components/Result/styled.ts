@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 import { IconButton } from '@mui/material';
-import {
-  peppermint,
-  pomegranate15,
-  pomegranate,
-  silverChalice15,
-  black,
-} from '../../utils/constants/colors';
+import colors from '../../utils/constants/colors';
 import DeleteOutline from '@mui/icons-material/DeleteOutline';
 import Save from '@mui/icons-material/Save';
 
@@ -17,33 +11,33 @@ export const StyledResult = styled('div')`
 `;
 
 export const StyledRestartButton = styled(IconButton)`
-  background-color: ${pomegranate15};
+  background-color: ${colors.pomegranate15};
   border-radius: 15px;
   width: 40px;
   height: 40px;
   align-self: center;
 
   :hover {
-    background-color: ${peppermint};
+    background-color: ${colors.peppermint};
 `;
 
 export const StyledRestartButtonIcon = styled(DeleteOutline)`
-  color: ${pomegranate};
+  color: ${colors.pomegranate};
 `;
 
 export const StyledSaveButton = styled(IconButton)`
-  background-color: ${silverChalice15};
+  background-color: ${colors.silverChalice15};
   border-radius: 15px;
   width: 40px;
   height: 40px;
   align-self: center;
 
   :hover {
-    background-color: ${peppermint};
+    background-color: ${colors.peppermint};
 `;
 
 export const StyledSaveButtonIcon = styled(Save)`
-  color: ${black};
+  color: ${colors.black};
 `;
 
 export const StyledButtonsWrapper = styled('div')`

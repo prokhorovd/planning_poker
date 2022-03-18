@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import { IconButton } from '@mui/material';
-import {
-  black,
-  scorpion,
-  white,
-  silverChalice,
-} from '../../utils/constants/colors';
+import colors from '../../utils/constants/colors';
 import PlayArrow from '@mui/icons-material/PlayArrow';
 
 export const StyledLobby = styled('div')`
@@ -15,20 +10,20 @@ export const StyledLobby = styled('div')`
 `;
 
 export const StyledDescription = styled('div')`
-  color: ${silverChalice};
+  color: ${colors.silverChalice};
 `;
 
 export const StyledStartGameButton = styled(IconButton)`
-  background-color: ${black};
+  background-color: ${colors.black};
   margin-top: 20px;
   width: 60px;
   height: 60px;
   align-self: center;
 
   :hover {
-    background-color: ${scorpion};
+    background-color: ${colors.scorpion};
 `;
 
 export const StyledStartGameIcon = styled(PlayArrow)`
-  color: ${white};
+  color: ${colors.white};
 `;
