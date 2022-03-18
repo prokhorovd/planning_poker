@@ -15,14 +15,14 @@ export function defineBackgroundColor(gameState: GameState) {
 }
 
 interface Props {
-  gameState: GameState;
+  $gameState: GameState;
 }
 
-export const StyledApp = styled.div<{ gameState: GameState }>`
+export const StyledApp = styled.div<Props>`
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
   font-size: calc(10px + 1vmin);
-  background: ${({ gameState }: Props) => defineBackgroundColor(gameState)};
+  background: ${(props: Props) => defineBackgroundColor(props.$gameState)};
 `;

@@ -7,7 +7,7 @@ import store from './stores/store';
 
 const App: FC = () => {
   return (
-    <StyledApp gameState={store.gameState}>
+    <StyledApp $gameState={store.gameState}>
       <Header />
       <Outlet />
     </StyledApp>
