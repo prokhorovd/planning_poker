@@ -8,13 +8,13 @@ import Lobby from '../../../pages/Lobby/Lobby';
 
 const Routing: FC = () => {
   let [searchParams] = useSearchParams();
-  const roomId = String(searchParams.get('id'));
+  const roomId = searchParams.get('id')?.toString();
   return (
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<CreateRoomPage />} />
         <Route path="join/" element={<JoinRoomPage />} />
-        <Route path="room/" element={<Lobby roomId={roomId} />} />
+        {roomId && <Route path="room/" element={<Lobby roomId={roomId} />} />}
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
