@@ -23,13 +23,13 @@ function printPage() {
 
 function restartGame(roomId: string) {
   store.setGameState(GameState.Idle);
-  store.roomData[roomId].userList.map((user: User) => {
+  store.room!.userList.map((user: User) => {
     store.pickCard(roomId, user.userName, null);
   });
 }
 
 const Result: FC<Props> = ({ roomID }) => {
-  const userList = store.roomData[roomID].userList;
+  const userList = store.room!.userList;
   let totalScore = 0;
   let votedUsers = 0;
   userList.map((user: User) => {

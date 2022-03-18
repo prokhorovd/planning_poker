@@ -4,12 +4,8 @@ import { UserCard } from './UserCard';
 import store, { User } from '../../stores/store';
 import { observer } from 'mobx-react-lite';
 
-interface UserListProps {
-  roomID: string;
-}
-
-const UserList: FC<UserListProps> = ({ roomID }) => {
-  const userList = store.roomData[roomID].userList;
+const UserList: FC = () => {
+  const userList = store.room!.userList;
   // make list of user cards
   const userCards = userList.map((element: User) => {
     const args = {

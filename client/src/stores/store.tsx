@@ -21,6 +21,12 @@ interface RoomParameters {
   userEmoji: string;
 }
 
+interface Room {
+  roomID: string;
+  roomName: string;
+  userList: User[];
+}
+
 class Store {
   constructor() {
     makeAutoObservable(this);
@@ -52,30 +58,11 @@ class Store {
   }
 
   @observable
-  roomData: any = {
-    sdUGShS_2p: {
-      roomID: 'sdUGShS_2p',
-      roomName: 'TestRoom',
-      userList: [
-        {
-          userName: 'Admin',
-          userEmoji: 'santa',
-          pickedCard: null,
-          admin: true,
-        },
-        {
-          userName: 'User2',
-          userEmoji: 'smiley',
-          pickedCard: null,
-          admin: false,
-        },
-      ],
-    },
-  };
+  room: Room | null = null;
   @action
   createRoom(roomParameters: RoomParameters) {
     const { id, roomName, userName, userEmoji } = roomParameters;
-    this.roomData[id] = {
+    this.room = {
       roomID: id,
       roomName,
       userList: [
@@ -89,8 +76,12 @@ class Store {
     };
   }
   @action
+  resetRoom() {
+    this.room = null;
+  }
+  @action
   addUserToRoom(roomId: string, user: User) {
-    this.roomData[roomId].userList.push(user);
+    this.room!.userList.push(user);
   }
   @action
   pickCard(
@@ -98,12 +89,12 @@ class Store {
     userName: string | null,
     pickedCard: string | number | null,
   ) {
-    this.roomData[roomId].userList.map((user: User) => {
+    this.room!.userList.map((user: User) => {
       if (user.userName === userName) {
         // find user in userList array
-        const index = this.roomData[roomId].userList.indexOf(user);
+        const index = this.room!.userList.indexOf(user);
         // register user vote
-        this.roomData[roomId].userList[index].pickedCard = pickedCard;
+        this.room!.userList[index].pickedCard = pickedCard;
       }
     });
   }

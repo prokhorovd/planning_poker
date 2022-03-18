@@ -29,7 +29,7 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
   return (
     <StyledLobby>
       <h1>
-        {store.roomData[roomId].roomName} (#{roomId})
+        {store.room!.roomName} (#{roomId})
       </h1>
       <StyledDescription>
         {/*Temporary set to admin name, should depend on who visiting page*/}
@@ -38,7 +38,7 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
       <StyledLink>{link}</StyledLink>
       <button onClick={() => copyLink(link)}>Copy link to clipboard</button>
       <Timer />
-      <UserList roomID={roomId} />
+      <UserList />
       {/* start game button: change gameState to vote and disappear*/}
       {/*should be visible to admin only*/}
       {store.gameState === GameState.Idle && store.currentUser.admin && (
@@ -72,6 +72,7 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
             store.setGameState(GameState.Login);
             store.setCurrentUser('', false);
             store.setCurrentUserEmoji('');
+            store.resetRoom();
           }}
         >
           Create the new room

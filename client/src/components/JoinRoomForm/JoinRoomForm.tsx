@@ -42,7 +42,7 @@ const JoinRoomForm: FC = () => {
       if (!userEmoji) {
         console.log('icon is not set');
         return;
-      } else if (store.roomData[roomID] === undefined) {
+      } else if (store.room?.roomID !== roomID) {
         console.log('room with this id is not exist');
         return;
       }
