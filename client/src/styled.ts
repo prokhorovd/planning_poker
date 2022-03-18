@@ -18,7 +18,7 @@ interface Props {
   gameState: GameState;
 }
 
-export const StyledApp = styled.div`
+export const StyledApp = styled.div<{ gameState: GameState }>`
   display: flex;
   flex-direction: column;
   align-items: center;
