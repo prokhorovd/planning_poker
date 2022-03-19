@@ -23,7 +23,7 @@ function printPage() {
 
 function restartGame(roomId: string) {
   store.setGameState(GameState.Idle);
-  store.room!.userList.map((user: User) => {
+  store.room!.userList.forEach((user: User) => {
     store.pickCard(roomId, user.userName, null);
   });
 }
@@ -32,7 +32,7 @@ const Result: FC<Props> = ({ roomID }) => {
   const userList = store.room!.userList;
   let totalScore = 0;
   let votedUsers = 0;
-  userList.map((user: User) => {
+  userList.forEach((user: User) => {
     if (Number(user.pickedCard)) {
       totalScore += Number(user.pickedCard);
       votedUsers += 1;

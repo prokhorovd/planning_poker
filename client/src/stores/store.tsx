@@ -88,7 +88,7 @@ class Store {
     userName: string | null,
     pickedCard: string | number | null,
   ) {
-    this.room!.userList.map((user: User) => {
+    this.room!.userList.forEach((user: User) => {
       if (user.userName === userName) {
         // find user in userList array
         const index = this.room!.userList.indexOf(user);
