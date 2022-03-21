@@ -55,6 +55,13 @@ class Store {
   setCurrentUserEmoji(emoji: string) {
     this.currentUser.userEmoji = emoji;
   }
+  @action
+  resetCurrentUser(){
+    this.currentUser.userName = null;
+    this.currentUser.userEmoji = null;
+    this.currentUser.admin = false;
+  }
+
 
   @observable
   room: Room | null = null;
