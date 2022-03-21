@@ -25,14 +25,13 @@ function copyLink(linkText: string) {
 }
 
 const Lobby: FC<Props> = observer(({ roomId }) => {
-  const link: string = `${window.location.host}/join?roomId=${roomId}`;
+  const link: string = `https://${window.location.host}/join?roomId=${roomId}`;
   return (
     <StyledLobby>
       <h1>
         {store.room!.roomName} (#{roomId})
       </h1>
       <StyledDescription>
-        {/*Temporary set to admin name, should depend on who visiting page*/}
         Hi, <b>{store.currentUser.userName}</b>. Use this link to invite others:
       </StyledDescription>
       <StyledLink>{link}</StyledLink>
@@ -40,7 +39,6 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
       <Timer />
       <UserList />
       {/* start game button: change gameState to vote and disappear*/}
-      {/*should be visible to admin only*/}
       {store.gameState === GameState.Idle && store.currentUser.admin && (
         <StyledStartGameButton
           onClick={() => store.setGameState(GameState.Vote)}
@@ -49,7 +47,6 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
         </StyledStartGameButton>
       )}
       {/* cards block - shows when game started, disappear at the timer end */}
-      {/*Username temporary set to admin name, should depend on who visiting page*/}
       {store.gameState === GameState.Vote && (
         <Cards deck={fibonacciDeck} roomID={roomId} />
       )}
