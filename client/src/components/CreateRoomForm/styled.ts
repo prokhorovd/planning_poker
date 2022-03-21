@@ -27,4 +27,5 @@ export const StyledCreateRoomForm = styled.form`
 export const StyledCreateRoomFormError = styled.div`
   font-size: 11px;
   color: ${colors.chestnutRose};
+  text-align: center;
 `;

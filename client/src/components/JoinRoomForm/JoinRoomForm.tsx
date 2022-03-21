@@ -1,17 +1,18 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
 import {
   StyledSubmitButton,
   StyledSubmitButtonIcon,
-  StyledCreateRoomForm,
-  StyledCreateRoomFormError,
+  StyledJoinRoomForm,
+  StyledJoinRoomFormError,
 } from './styled';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import store, { GameState, User } from '../../stores/store';
 
 const JoinRoomForm: FC = () => {
+  const [iconValidation, setIconValidation] = useState<null | boolean>(null);
   let navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const formik = useFormik({
@@ -40,7 +41,7 @@ const JoinRoomForm: FC = () => {
       const roomID = values.roomID;
       const { userEmoji } = store.currentUser;
       if (!userEmoji) {
-        console.log('icon is not set');
+        setIconValidation(false);
         return;
       } else if (store.room?.roomID !== roomID) {
         console.log('room with this id is not exist');
@@ -60,7 +61,12 @@ const JoinRoomForm: FC = () => {
     },
   });
   return (
-    <StyledCreateRoomForm onSubmit={formik.handleSubmit}>
+    <StyledJoinRoomForm onSubmit={formik.handleSubmit}>
+      {iconValidation === false && (
+        <StyledJoinRoomFormError>
+          Please click above to select avatar
+        </StyledJoinRoomFormError>
+      )}
       <TextField
         label="User name"
         variant="standard"
@@ -75,9 +81,9 @@ const JoinRoomForm: FC = () => {
         required
       />
       {formik.touched.userName && formik.errors.userName ? (
-        <StyledCreateRoomFormError>
+        <StyledJoinRoomFormError>
           {formik.errors.userName}
-        </StyledCreateRoomFormError>
+        </StyledJoinRoomFormError>
       ) : null}
       <TextField
         label="RoomID"
@@ -93,14 +99,14 @@ const JoinRoomForm: FC = () => {
         required
       />
       {formik.touched.roomID && formik.errors.roomID ? (
-        <StyledCreateRoomFormError>
+        <StyledJoinRoomFormError>
           {formik.errors.roomID}
-        </StyledCreateRoomFormError>
+        </StyledJoinRoomFormError>
       ) : null}
       <StyledSubmitButton type="submit" size="large" aria-label="submit-button">
         <StyledSubmitButtonIcon />
       </StyledSubmitButton>
-    </StyledCreateRoomForm>
+    </StyledJoinRoomForm>
   );
 };
 

@@ -48,7 +48,6 @@ const IconPicker: FC = () => {
           />
         )}
       </StyledUserIconLayout>
-      {!userEmoji && 'Сlick above to select your avatar'}
     </StyledIconPicker>
   );
 };

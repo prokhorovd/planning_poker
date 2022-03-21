@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
@@ -14,6 +14,7 @@ import { nanoid } from 'nanoid';
 
 const CreateRoomForm: FC = () => {
   let navigate = useNavigate();
+  const [iconValidation, setIconValidation] = useState<null | boolean>(null);
   const formik = useFormik({
     initialValues: {
       userName: '',
@@ -39,6 +40,7 @@ const CreateRoomForm: FC = () => {
       const { userEmoji } = store.currentUser;
       // stop submit if user emoji is not set
       if (!userEmoji) {
+        setIconValidation(false);
         return;
       }
       // create room with params
@@ -58,6 +60,11 @@ const CreateRoomForm: FC = () => {
   });
   return (
     <StyledCreateRoomForm onSubmit={formik.handleSubmit}>
+      {iconValidation === false && (
+        <StyledCreateRoomFormError>
+          Please click above to select avatar
+        </StyledCreateRoomFormError>
+      )}
       <TextField
         label="User name"
         variant="standard"

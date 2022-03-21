@@ -19,6 +19,19 @@ export const StyledUserIconLayout = styled.div`
   background-color: ${colors.silverChalice10};
   border-radius: 25px;
   margin-bottom: 5px;
+  animation-name: error;
+  animation-duration: 1s;
+  @keyframes error {
+    0% {
+      background-color: ${colors.silverChalice10};
+    }
+    50% {
+      background-color: ${colors.pomegranate15};
+    }
+    100% {
+      background-color: ${colors.silverChalice10};
+    }
+  }
 `;
 
 export const StyledUserIconEmoji = styled.div`

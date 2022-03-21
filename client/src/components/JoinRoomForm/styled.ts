@@ -18,13 +18,14 @@ export const StyledSubmitButtonIcon = styled(ArrowRightAltIcon)`
   color: ${colors.white};
 `;
 
-export const StyledCreateRoomForm = styled.form`
+export const StyledJoinRoomForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 200px;
 `;
 
-export const StyledCreateRoomFormError = styled.div`
+export const StyledJoinRoomFormError = styled.div`
   font-size: 11px;
   color: ${colors.chestnutRose};
+  text-align: center;
 `;
