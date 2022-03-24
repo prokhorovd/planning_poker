@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Link as StyledLink } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Timer from '../../components/Timer/Timer';
-import store, { GameState } from '../../stores/store';
+import store, { GameState, Room } from '../../stores/store';
 import { observer } from 'mobx-react-lite';
 import UserList from '../../components/UserList/UserList';
 import {
@@ -25,7 +25,17 @@ function copyLink(linkText: string) {
 }
 
 const Lobby: FC<Props> = observer(({ roomId }) => {
+  const socket = store.socket;
   const link: string = `https://${window.location.host}/join?roomId=${roomId}`;
+  socket.on(
+    'join room event',
+    (respond: { result: Room | null; error: string }) => {
+      const { result } = respond;
+      if (result) {
+        store.updateRoom(result);
+      }
+    },
+  );
   return (
     <StyledLobby>
       <h1>
@@ -67,7 +77,7 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
           to="/"
           onClick={() => {
             store.setGameState(GameState.Login);
-            store.setCurrentUser('', false);
+            store.setCurrentUser(null, false, null);
             store.setCurrentUserEmoji('');
             store.resetRoom();
           }}
@@ -81,10 +91,25 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
               userName: nanoid(4),
               userEmoji: 'santa',
               pickedCard: Math.floor(Math.random() * (37 - 1)) + 1,
+              userSocket: 'oAWp_wVa4fhiFHQIAAAD',
             })
           }
         >
           add user
+        </button>
+        <button
+          onClick={() => {
+            socket.emit('show all rooms');
+          }}
+        >
+          show room info
+        </button>
+        <button
+          onClick={() => {
+            socket.emit('show room', roomId);
+          }}
+        >
+          show this room info
         </button>
         <div>current user: {store.currentUser.userName}</div>
       </div>

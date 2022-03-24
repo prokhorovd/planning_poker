@@ -9,10 +9,12 @@ import {
   StyledJoinRoomFormError,
 } from './styled';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import store, { GameState, User } from '../../stores/store';
+import store, { GameState, Room, User } from '../../stores/store';
 
 const JoinRoomForm: FC = () => {
+  const socket = store.socket;
   const [iconValidation, setIconValidation] = useState<null | boolean>(null);
+  const [roomValidation, setRoomValidation] = useState<null | boolean>(null);
   let navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const formik = useFormik({
@@ -43,21 +45,29 @@ const JoinRoomForm: FC = () => {
       if (!userEmoji) {
         setIconValidation(false);
         return;
-      } else if (store.room?.roomID !== roomID) {
-        console.log('room with this id is not exist');
-        return;
       }
-      // config user and add to room
       const { userName } = values;
       const user: User = {
         userName,
         userEmoji,
         pickedCard: null,
+        userSocket: socket.id,
       };
-      store.setCurrentUser(userName, false);
-      store.addUserToRoom(roomID, user);
-      store.setGameState(GameState.Idle);
-      navigate(`/room?id=${values.roomID}`, { replace: true });
+      socket.emit('try add user to the room', { roomID, user });
+      socket.on(
+        'join room event',
+        (answer: { result: Room | null; error: string }) => {
+          const { result, error } = answer;
+          if (error) {
+            setRoomValidation(false);
+          } else if (result) {
+            store.updateRoom(result);
+            store.setCurrentUser(userName, false, socket.id);
+            store.setGameState(GameState.Idle);
+            navigate(`/room?id=${values.roomID}`, { replace: true });
+          }
+        },
+      );
     },
   });
   return (
@@ -103,6 +113,11 @@ const JoinRoomForm: FC = () => {
           {formik.errors.roomID}
         </StyledJoinRoomFormError>
       ) : null}
+      {roomValidation === false && (
+        <StyledJoinRoomFormError>
+          Room with this id doesn't exist
+        </StyledJoinRoomFormError>
+      )}
       <StyledSubmitButton type="submit" size="large" aria-label="submit-button">
         <StyledSubmitButtonIcon />
       </StyledSubmitButton>

@@ -31,11 +31,13 @@ const CreateRoomPage: FC = () => {
         <StyledCreatePageLink
           to="/join?roomId=sdUGShS_2p"
           onClick={() => {
+            const socket = store.socket;
             store.createRoom({
               id: 'sdUGShS_2p',
               roomName: 'testRoom',
               userEmoji: 'santa',
               userName: 'admin',
+              userSocket: socket.id,
             });
           }}
         >
