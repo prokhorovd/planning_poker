@@ -1,18 +1,18 @@
-// App
-export const APP_BACKGROUND = '#FAFAFA';
+const colors = {
+  alabaster: '#FAFAFA',
+  ginFizz: '#FFF8E1',
+  aquaSqueeze: '#E0F2F1',
+  silverChalice: '#9E9E9E',
+  silverChalice10: 'rgba(158, 158, 158, 0.1)', // transparency 10%
+  silverChalice15: 'rgba(158, 158, 158, 0.15)', // transparency 15%
+  peppermint: '#CAEECC',
+  white: '#FFFFFF',
+  panache: '#E8F5E9',
+  black: '#000000',
+  scorpion: '#5F5F5F',
+  chestnutRose: '#CD5C5CFF',
+  pomegranate: '#F44336',
+  pomegranate15: 'rgba(244, 67, 54, 0.15)',
+};
 
-// Reusable
-export const EMOJI_BACKGROUND = 'rgba(158, 158, 158, 0.1)';
-export const EMOJI_BACKGROUND_SELECTED = '#CAEECCFF';
-
-// Cards component
-export const CARD_UNSELECTED = '#FFFFFF';
-export const CARD_UNSELECTED_HOVER = '#E8F5E9';
-export const CARD_SELECTED = '#CAEECC';
-export const CARD_SELECTED_HOVER = '#CAEECC';
-
-// CreateRoomForm
-export const SUBMIT_BUTTON_BACKGROUND = '#000000';
-export const SUBMIT_BUTTON_BACKGROUND_HOVER = '#5F5F5F';
-export const SUBMIT_BUTTON_ICON = '#FFFFFF';
-export const ERROR_COLOR = '#CD5C5CFF';
+export default colors;

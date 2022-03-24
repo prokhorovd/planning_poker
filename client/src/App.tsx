@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { StyledApp } from './styled';
 import Header from './components/Header/Header';
 import { Outlet } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import store from './stores/store';
 
-function App() {
+const App: FC = () => {
   return (
-    <StyledApp>
+    <StyledApp $gameState={store.gameState}>
       <Header />
       <Outlet />
     </StyledApp>
   );
-}
+};
 
-export default App;
+export default observer(App);

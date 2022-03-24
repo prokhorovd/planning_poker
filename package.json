@@ -11,7 +11,7 @@
     "clean": "rm -rf client/build",
     "client:start": "concurrently --kill-others-on-fail \"npm run client:build && cd client && npm run serve -s build\"",
     "server:start": "concurrently --kill-others-on-fail \"cd server && npm run start\"",
-    "start": "concurrently --kill-others-on-fail \"npm run server:start\" \"npm run client:build\"",
+    "start": "concurrently --kill-others-on-fail  \"npm run client:build\" \"npm run server:start\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:eslint": "eslint ./client/src/ --ext .ts,.tsx",
     "lint:eslint:fix": "eslint ./client/src/ --ext .ts,.tsx --fix",
@@ -23,6 +23,9 @@
     "client",
     "server"
   ],
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  },
   "devDependencies": {
     "eslint": "^8.10.0",
     "eslint-config-airbnb-typescript": "^16.1.0",

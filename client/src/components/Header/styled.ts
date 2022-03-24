@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { EMOJI_BACKGROUND } from '../../utils/constants/colors';
+import colors from '../../utils/constants/colors';
 
 export const StyledHeaderLayout = styled.div`
   width: 60vw;
@@ -14,14 +14,10 @@ export const StyledHeaderLogo = styled.div`
   width: 45px;
   height: 45px;
   background: url('assets/images/game-logo.png') center no-repeat
-    ${EMOJI_BACKGROUND};
+    ${colors.silverChalice10};
   border-radius: 15px;
 `;
 
 export const StyledHeaderUserIcon = styled.div`
   margin: 30px;
-`;
-
-export const StyledHeaderUserIconHidden = styled.div`
-  display: none;
 `;

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
@@ -8,8 +8,13 @@ import {
   StyledCreateRoomForm,
   StyledCreateRoomFormError,
 } from './styled';
+import store, { GameState } from '../../stores/store';
+import { useNavigate } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 
 const CreateRoomForm: FC = () => {
+  let navigate = useNavigate();
+  const [iconValidation, setIconValidation] = useState<null | boolean>(null);
   const formik = useFormik({
     initialValues: {
       userName: '',
@@ -32,11 +37,34 @@ const CreateRoomForm: FC = () => {
         ),
     }),
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
+      const { userEmoji } = store.currentUser;
+      // stop submit if user emoji is not set
+      if (!userEmoji) {
+        setIconValidation(false);
+        return;
+      }
+      // create room with params
+      const roomID = nanoid(10);
+      const { roomName, userName } = values;
+      const roomParams = {
+        id: roomID,
+        roomName,
+        userName,
+        userEmoji: userEmoji,
+      };
+      store.setCurrentUser(userName, true);
+      store.createRoom(roomParams);
+      store.setGameState(GameState.Idle);
+      navigate(`/room?id=${roomID}`, { replace: true });
     },
   });
   return (
     <StyledCreateRoomForm onSubmit={formik.handleSubmit}>
+      {iconValidation === false && (
+        <StyledCreateRoomFormError>
+          Please click above to select avatar
+        </StyledCreateRoomFormError>
+      )}
       <TextField
         label="User name"
         variant="standard"

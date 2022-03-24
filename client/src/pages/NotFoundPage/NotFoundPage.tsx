@@ -5,7 +5,7 @@ import {
   StyledLink,
 } from './styled';
 
-const CreatePage: FC = () => {
+const NotFoundPage: FC = () => {
   return (
     <StyledNotFoundPage>
       <StyledNotFoundPageHeading>Page not found</StyledNotFoundPageHeading>
@@ -14,4 +14,4 @@ const CreatePage: FC = () => {
   );
 };
 
-export default CreatePage;
+export default NotFoundPage;

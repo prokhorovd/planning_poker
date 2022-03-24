@@ -1,15 +1,16 @@
-import { UserData, UserListState } from './components/UserList/UserList';
-
 // temp data for UserList component testing purposes
-export const dataForUserListComponent: UserData[] = [
+import { User } from './stores/store';
+import React from 'react';
+
+export const dataForUserListComponent: User[] = [
   {
     userName: 'User1',
     userEmoji: 'santa',
-    pickedCard: null,
+    pickedCard: '13',
   },
   {
     userName: 'User2',
-    userEmoji: 'coffee',
+    userEmoji: 'sleepy',
     pickedCard: null,
   },
   {
@@ -19,14 +20,12 @@ export const dataForUserListComponent: UserData[] = [
   },
   {
     userName: 'User4',
-    userEmoji: 'smiley',
+    userEmoji: 'sunglasses',
     pickedCard: null,
   },
   {
     userName: 'User5',
-    userEmoji: 'smiley',
+    userEmoji: 'innocent',
     pickedCard: '5',
   },
 ];
-
-export const stateForUserListComponent = UserListState.Idle; // possible values: Idle, Vote, Voted

@@ -1,16 +1,19 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { TextField } from '@mui/material';
 import {
   StyledSubmitButton,
   StyledSubmitButtonIcon,
-  StyledCreateRoomForm,
-  StyledCreateRoomFormError,
+  StyledJoinRoomForm,
+  StyledJoinRoomFormError,
 } from './styled';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import store, { GameState, User } from '../../stores/store';
 
 const JoinRoomForm: FC = () => {
+  const [iconValidation, setIconValidation] = useState<null | boolean>(null);
+  let navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const formik = useFormik({
     initialValues: {
@@ -26,16 +29,44 @@ const JoinRoomForm: FC = () => {
           "Please don't use special characters",
         ),
       roomID: Yup.string()
-        .max(6, 'Room ID contain 6 digits')
+        .min(10, 'Room ID contain 10 characters')
+        .max(10, 'Room ID contain 10 characters')
         .required('Required')
-        .matches(/^[0-9]*$/gi, 'Please use digits only'),
+        .matches(
+          /^[A-Za-z0-9_-]*$/gi,
+          "Allowed characters are letters, numbers and symbols: '_' '-'",
+        ),
     }),
     onSubmit: (values) => {
-      console.log(JSON.stringify(values, null, 2));
+      const roomID = values.roomID;
+      const { userEmoji } = store.currentUser;
+      if (!userEmoji) {
+        setIconValidation(false);
+        return;
+      } else if (store.room?.roomID !== roomID) {
+        console.log('room with this id is not exist');
+        return;
+      }
+      // config user and add to room
+      const { userName } = values;
+      const user: User = {
+        userName,
+        userEmoji,
+        pickedCard: null,
+      };
+      store.setCurrentUser(userName, false);
+      store.addUserToRoom(roomID, user);
+      store.setGameState(GameState.Idle);
+      navigate(`/room?id=${values.roomID}`, { replace: true });
     },
   });
   return (
-    <StyledCreateRoomForm onSubmit={formik.handleSubmit}>
+    <StyledJoinRoomForm onSubmit={formik.handleSubmit}>
+      {iconValidation === false && (
+        <StyledJoinRoomFormError>
+          Please click above to select avatar
+        </StyledJoinRoomFormError>
+      )}
       <TextField
         label="User name"
         variant="standard"
@@ -50,9 +81,9 @@ const JoinRoomForm: FC = () => {
         required
       />
       {formik.touched.userName && formik.errors.userName ? (
-        <StyledCreateRoomFormError>
+        <StyledJoinRoomFormError>
           {formik.errors.userName}
-        </StyledCreateRoomFormError>
+        </StyledJoinRoomFormError>
       ) : null}
       <TextField
         label="RoomID"
@@ -68,14 +99,14 @@ const JoinRoomForm: FC = () => {
         required
       />
       {formik.touched.roomID && formik.errors.roomID ? (
-        <StyledCreateRoomFormError>
+        <StyledJoinRoomFormError>
           {formik.errors.roomID}
-        </StyledCreateRoomFormError>
+        </StyledJoinRoomFormError>
       ) : null}
       <StyledSubmitButton type="submit" size="large" aria-label="submit-button">
         <StyledSubmitButtonIcon />
       </StyledSubmitButton>
-    </StyledCreateRoomForm>
+    </StyledJoinRoomForm>
   );
 };
 

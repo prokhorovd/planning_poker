@@ -1,11 +1,28 @@
 import styled from 'styled-components';
-import { APP_BACKGROUND } from './utils/constants/colors';
+import { GameState } from './stores/store';
+import colors from './utils/constants/colors';
 
-export const StyledApp = styled.div`
+export function defineBackgroundColor(gameState: GameState) {
+  let appBackground;
+  if (gameState === GameState.Vote) {
+    appBackground = colors.ginFizz;
+  } else if (gameState === GameState.Voted) {
+    appBackground = colors.aquaSqueeze;
+  } else {
+    appBackground = colors.alabaster;
+  }
+  return appBackground;
+}
+
+interface Props {
+  $gameState: GameState;
+}
+
+export const StyledApp = styled.div<Props>`
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  background-color: ${APP_BACKGROUND};
   font-size: calc(10px + 1vmin);
+  background: ${(props: Props) => defineBackgroundColor(props.$gameState)};
 `;

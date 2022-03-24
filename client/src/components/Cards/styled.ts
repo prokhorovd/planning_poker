@@ -1,32 +1,27 @@
 import styled from 'styled-components';
-import {
-  CARD_UNSELECTED,
-  CARD_SELECTED,
-  CARD_SELECTED_HOVER,
-  CARD_UNSELECTED_HOVER,
-} from '../../utils/constants/colors';
+import colors from '../../utils/constants/colors';
 
 export const StyledCardItem = styled.div`
   margin: 5px;
   height: 145px;
   width: 90px;
   font-size: 24px;
-  background-color: ${CARD_UNSELECTED};
+  background-color: ${colors.white};
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 15px;
   transition: 100ms;
   &:hover {
-    background-color: ${CARD_UNSELECTED_HOVER};
+    background-color: ${colors.panache};
   }
 `;
 
 export const StyledCardItemActive = styled(StyledCardItem)`
-  background-color: ${CARD_SELECTED};
+  background-color: ${colors.peppermint};
 
   &:hover {
-    background-color: ${CARD_SELECTED_HOVER};
+    background-color: ${colors.peppermint};
   }
 `;
 

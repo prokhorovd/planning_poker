@@ -1,16 +1,20 @@
 import React, { FC } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useSearchParams } from 'react-router-dom';
 import App from '../../../App';
-import CreatePage from '../../../pages/Create/CreatePage';
-import JoinPage from '../../../pages/Join/JoinPage';
+import CreateRoomPage from '../../../pages/Create/CreateRoomPage';
+import JoinRoomPage from '../../../pages/Join/JoinRoomPage';
 import NotFoundPage from '../../../pages/NotFoundPage/NotFoundPage';
+import Lobby from '../../../pages/Lobby/Lobby';
 
 const Routing: FC = () => {
+  let [searchParams] = useSearchParams();
+  const roomId = searchParams.get('id')?.toString();
   return (
     <Routes>
       <Route path="/" element={<App />}>
-        <Route index element={<CreatePage />} />
-        <Route path="join/" element={<JoinPage />} />
+        <Route index element={<CreateRoomPage />} />
+        <Route path="join/" element={<JoinRoomPage />} />
+        {roomId && <Route path="room/" element={<Lobby roomId={roomId} />} />}
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
