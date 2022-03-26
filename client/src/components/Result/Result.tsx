@@ -22,16 +22,20 @@ function printPage() {
 }
 
 function restartGame(roomId: string) {
-  store.setGameState(GameState.Idle);
-  store.room!.userList.forEach((user: User) => {
-    store.pickCard(roomId, user.userName, null);
-  });
+  const socket = store.socket;
+  socket.emit('init restart game', { roomId });
 }
 
 const Result: FC<Props> = ({ roomID }) => {
+  const socket = store.socket;
   const userList = store.room!.userList;
   let totalScore = 0;
   let votedUsers = 0;
+  socket.on('restart game', (data: { userList: User[] }) => {
+    const { userList } = data;
+    store.updateRoomUserList(userList);
+    store.setGameState(GameState.Idle);
+  });
   userList.forEach((user: User) => {
     if (Number(user.pickedCard)) {
       totalScore += Number(user.pickedCard);

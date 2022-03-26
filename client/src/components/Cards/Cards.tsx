@@ -10,11 +10,13 @@ interface Props {
 }
 
 const Cards: FC<Props> = ({ deck, roomID }) => {
+  const socket = store.socket;
   const [activeCard, setActiveCard] = useState<null | string | number>(null);
-  const { userName } = store.currentUser;
+  const { userSocket } = store.currentUser;
   const selectCard: (cardName: string | number) => void = (cardName) => {
     setActiveCard(cardName);
-    store.pickCard(roomID, userName, cardName);
+    socket.emit('pick card initiated', { roomID, userSocket, cardName });
+    store.pickCard(roomID, userSocket, cardName);
   };
   const calculatedDeck = deck.map((element) => {
     const cardOptions = {
@@ -26,12 +28,7 @@ const Cards: FC<Props> = ({ deck, roomID }) => {
     }
     return <Card data={cardOptions} key={element.value} />;
   });
-  return (
-    <StyledCardField>
-      {calculatedDeck}
-      <div>active card is {activeCard ? activeCard : 'not set'}</div>
-    </StyledCardField>
-  );
+  return <StyledCardField>{calculatedDeck}</StyledCardField>;
 };
 
 export default Cards;

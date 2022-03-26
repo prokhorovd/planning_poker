@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { Link as StyledLink } from '@mui/material';
-import { Link } from 'react-router-dom';
 import Timer from '../../components/Timer/Timer';
 import store, { GameState, Room } from '../../stores/store';
 import { observer } from 'mobx-react-lite';
@@ -14,7 +13,6 @@ import {
 import Cards from '../../components/Cards/Cards';
 import { fibonacciDeck } from '../../components/Cards/decks';
 import Result from '../../components/Result/Result';
-import { nanoid } from 'nanoid';
 
 interface Props {
   roomId: string;
@@ -36,6 +34,9 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
       }
     },
   );
+  socket.on('start game', () => {
+    store.setGameState(GameState.Vote);
+  });
   return (
     <StyledLobby>
       <h1>
@@ -51,7 +52,9 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
       {/* start game button: change gameState to vote and disappear*/}
       {store.gameState === GameState.Idle && store.currentUser.admin && (
         <StyledStartGameButton
-          onClick={() => store.setGameState(GameState.Vote)}
+          onClick={() => {
+            socket.emit('initiate game start', roomId);
+          }}
         >
           <StyledStartGameIcon />
         </StyledStartGameButton>
@@ -62,57 +65,6 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
       )}
       {/* result of the game, shows at the timer end */}
       {store.gameState === GameState.Voted && <Result roomID={roomId} />}
-
-      {/*// delete development block below before prod*/}
-      <div
-        style={{
-          marginTop: '80px',
-          display: 'flex',
-          flexDirection: 'column',
-          color: 'gray',
-        }}
-      >
-        <p>development:</p>
-        <Link
-          to="/"
-          onClick={() => {
-            store.setGameState(GameState.Login);
-            store.setCurrentUser(null, false, null);
-            store.setCurrentUserEmoji('');
-            store.resetRoom();
-          }}
-        >
-          Create the new room
-        </Link>
-        {`gamestate is: ${store.gameState}`}
-        <button
-          onClick={() =>
-            store.addUserToRoom(roomId, {
-              userName: nanoid(4),
-              userEmoji: 'santa',
-              pickedCard: Math.floor(Math.random() * (37 - 1)) + 1,
-              userSocket: 'oAWp_wVa4fhiFHQIAAAD',
-            })
-          }
-        >
-          add user
-        </button>
-        <button
-          onClick={() => {
-            socket.emit('show all rooms');
-          }}
-        >
-          show room info
-        </button>
-        <button
-          onClick={() => {
-            socket.emit('show room', roomId);
-          }}
-        >
-          show this room info
-        </button>
-        <div>current user: {store.currentUser.userName}</div>
-      </div>
     </StyledLobby>
   );
 });

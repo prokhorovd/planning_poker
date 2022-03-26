@@ -9,12 +9,7 @@ const httpServer = createServer(app);
 console.log(process.env.PORT);
 const port = process.env.PORT || 4000;
 
-const {
-  createRoom,
-  getRoom,
-  addUserToRoom,
-  getRooms,
-} = require('./roomsData.tsx');
+const rooms = require('./rooms.tsx');
 
 // sockets
 const io = new Server(httpServer, {
@@ -28,28 +23,39 @@ io.on('connection', (socket) => {
     console.log(`${socket.id} was disconnected with reason ${reason}`);
   });
   socket.on('create room', (room) => {
-    createRoom(room);
+    rooms.createRoom(room);
+    socket.join(room.roomID);
   });
   socket.on('try add user to the room', ({ roomID, user }) => {
-    let roomExist = Object.keys(getRooms()).includes(roomID);
+    socket.join(roomID);
+    let roomExist = Object.keys(rooms.getRooms()).includes(roomID);
     if (!roomExist) {
       const result = null;
       const error = `room with id#${roomID} not exist`;
-      io.emit('join room event', { result, error });
+      io.to(roomID).emit('join room event', { result, error });
     } else {
-      addUserToRoom({ roomID, user });
-      const result = getRoom(roomID);
+      rooms.addUserToRoom({ roomID, user });
+      const result = rooms.getRoom(roomID);
       const error = '';
-      io.emit('join room event', { result, error });
+      io.to(roomID).emit('join room event', { result, error });
     }
   });
-  socket.on('show all rooms', () => {
-    const roomInfo = getRooms();
-    console.log(roomInfo);
+  socket.on('initiate game start', (roomId) => {
+    io.to(roomId).emit('start game');
   });
-  socket.on('show room', (roomID) => {
-    const roomInfo = getRoom(roomID);
-    console.log(roomInfo);
+  socket.on('pick card initiated', (data) => {
+    const { roomID, userSocket } = data;
+    rooms.updateUser(data);
+    io.to(roomID).emit('user was updated', {
+      user: rooms.getUser({ roomID, userSocket }),
+    });
+  });
+  socket.on('init restart game', ({ roomId }) => {
+    // reset all pickedCards in room
+    rooms.resetVotes(roomId);
+    io.to(roomId).emit('restart game', {
+      userList: rooms.getRoom(roomId).userList,
+    });
   });
 });
 

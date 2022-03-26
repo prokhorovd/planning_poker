@@ -121,6 +121,16 @@ class Store {
       }
     });
   }
+  @action
+  updateUser(user: User) {
+    const { userSocket } = user;
+    if (!!this.room) {
+      const userIndex = this.room.userList.findIndex(
+        (user) => user.userSocket === userSocket,
+      );
+      this.room.userList[userIndex] = user;
+    }
+  }
 }
 
 const store = new Store();
