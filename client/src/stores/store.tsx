@@ -30,14 +30,12 @@ export interface Room {
   userList: User[];
 }
 
-const ENDPOINT = 'http://localhost:4000';
-
 class Store {
   constructor() {
     makeAutoObservable(this);
   }
 
-  socket = io(ENDPOINT);
+  socket = io(process.env.ENDPOINT);
 
   @observable
   gameState: GameState = GameState.Login;
