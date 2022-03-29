@@ -15,7 +15,7 @@ const storage = Store.getInstance();
 // sockets
 const io = new Server(httpServer, {
   cors: {
-    origin: process.env.CORSORIGIN,
+    origin: process.env.FE_URL,
   },
 });
 io.on('connection', (socket: Socket) => {

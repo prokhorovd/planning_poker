@@ -35,7 +35,7 @@ class Store {
     makeAutoObservable(this);
   }
 
-  socket = io(process.env.ENDPOINT);
+  socket = io(process.env.BE_URL);
 
   @observable
   gameState: GameState = GameState.Login;
