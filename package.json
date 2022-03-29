@@ -2,7 +2,7 @@
   "name": "planning-poker",
   "version": "1.0.0",
   "description": "",
-  "main": "/server/app.tsx",
+  "main": "/server/app.ts",
   "scripts": {
     "client:serve": "concurrently --kill-others-on-fail \"cd client && npm run serve\"",
     "server:serve": "concurrently --kill-others-on-fail \"cd server && npm run serve\"",

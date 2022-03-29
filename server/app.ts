@@ -1,23 +1,25 @@
 require('dotenv').config();
 const path = require('path');
 const express = require('express');
-const app = express();
+import { Express, Request, Response } from 'express';
+const app: Express = express();
 const { createServer } = require('http');
-const { Server } = require('socket.io');
+import { Server, Socket } from 'socket.io';
 const httpServer = createServer(app);
 
 console.log(process.env.PORT);
 const port = process.env.PORT || 4000;
 
-const rooms = require('./rooms.tsx');
+const rooms = require('./rooms.ts');
 
 // sockets
+
 const io = new Server(httpServer, {
   cors: {
     origin: process.env.CORSORIGIN,
   },
 });
-io.on('connection', (socket) => {
+io.on('connection', (socket: Socket) => {
   console.log(`${socket.id} connected`);
   socket.on('disconnect', (reason) => {
     console.log(`${socket.id} was disconnected with reason ${reason}`);
@@ -61,11 +63,11 @@ io.on('connection', (socket) => {
 
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 
-app.get('/server', function (req, res) {
+app.get('/server', function (req: Request, res: Response) {
   res.send('server is available');
 });
 
-app.get('*', (req, res) => {
+app.get('*', (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
 });
 

@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "nodemon app.tsx",
-    "start": "node app.tsx"
+    "serve": "nodemon app.ts",
+    "start": "node app.ts"
   },
   "author": "Dmitriy Prokhorov",
   "license": "ISC",

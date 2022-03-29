@@ -1,6 +1,8 @@
-const rooms = {};
+import { Rooms, Room, addUserToRoomProps, updateUserProps, getUserProps } from './types';
 
-function createRoom(room) {
+const rooms: Rooms = {};
+
+function createRoom(room: Room) {
   rooms[room.roomID] = room;
 }
 
@@ -8,31 +10,32 @@ function getRooms() {
   return rooms;
 }
 
-function getRoom(roomID) {
+function getRoom(roomID: string) {
   return rooms[roomID];
 }
 
-function getUser({ roomID, userSocket }) {
+function getUser({ roomID, userSocket }: getUserProps) {
   return getRoom(roomID).userList.find(
     (user) => user.userSocket === userSocket,
   );
 }
 
-function addUserToRoom({ roomID, user }) {
+function addUserToRoom({ roomID, user }: addUserToRoomProps) {
   rooms[roomID].userList.push(user);
 }
 
-function updateUser({ roomID, userSocket, cardName }) {
+function updateUser({ roomID, userSocket, cardName }: updateUserProps) {
   const roomExist = !!rooms[roomID];
   if (!!roomExist) {
+
     const userIndex = rooms[roomID].userList.findIndex(
-      (element) => element.userSocket === userSocket,
+      (user) => user.userSocket === userSocket,
     );
     rooms[roomID].userList[userIndex].pickedCard = cardName;
   }
 }
 
-function resetVotes(roomID) {
+function resetVotes(roomID: string) {
   const roomExist = !!rooms[roomID];
   if (!!roomExist) {
     rooms[roomID].userList.forEach((user) => (user.pickedCard = null));
