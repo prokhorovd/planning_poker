@@ -108,18 +108,19 @@ class Store {
   }
   @action
   pickCard(
-    roomId: string,
+    roomID: string,
     userSocket: string | null,
-    pickedCard: string | number | null,
+    cardName: string | number | null,
   ) {
     this.room!.userList.forEach((user: User) => {
       if (user.userSocket === userSocket) {
         // find user in userList array
         const index = this.room!.userList.indexOf(user);
-        console.log(`pickCard: user index is: ${index}`);
         // register user vote
-        this.room!.userList[index].pickedCard = pickedCard;
+        this.room!.userList[index].pickedCard = cardName;
       }
+      // alert other users in room
+      this.socket.emit('pick card initiated', { roomID, userSocket, cardName });
     });
   }
   @action

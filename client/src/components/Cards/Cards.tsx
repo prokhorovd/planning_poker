@@ -10,12 +10,10 @@ interface Props {
 }
 
 const Cards: FC<Props> = ({ deck, roomID }) => {
-  const socket = store.socket;
   const [activeCard, setActiveCard] = useState<null | string | number>(null);
   const { userSocket } = store.currentUser;
   const selectCard: (cardName: string | number) => void = (cardName) => {
     setActiveCard(cardName);
-    socket.emit('pick card initiated', { roomID, userSocket, cardName });
     store.pickCard(roomID, userSocket, cardName);
   };
   const calculatedDeck = deck.map((element) => {
