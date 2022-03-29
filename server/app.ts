@@ -8,7 +8,6 @@ import { Server, Socket } from 'socket.io';
 const httpServer = createServer(app);
 import { Store } from './storage';
 
-console.log(process.env.PORT);
 const port = process.env.PORT || 4000;
 
 const storage = Store.getInstance();
@@ -72,5 +71,5 @@ app.get('*', (req: Request, res: Response) => {
 });
 
 httpServer.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Planning poker server listening on port ${port}`);
 });
