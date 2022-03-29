@@ -6,14 +6,14 @@ const app: Express = express();
 const { createServer } = require('http');
 import { Server, Socket } from 'socket.io';
 const httpServer = createServer(app);
+import { Store } from './storage';
 
 console.log(process.env.PORT);
 const port = process.env.PORT || 4000;
 
-const rooms = require('./rooms.ts');
+const storage = Store.getInstance();
 
 // sockets
-
 const io = new Server(httpServer, {
   cors: {
     origin: process.env.CORSORIGIN,
@@ -25,19 +25,19 @@ io.on('connection', (socket: Socket) => {
     console.log(`${socket.id} was disconnected with reason ${reason}`);
   });
   socket.on('create room', (room) => {
-    rooms.createRoom(room);
+    storage.createRoom(room);
     socket.join(room.roomID);
   });
   socket.on('try add user to the room', ({ roomID, user }) => {
     socket.join(roomID);
-    let roomExist = Object.keys(rooms.getRooms()).includes(roomID);
+    let roomExist = Object.keys(storage.getRooms()).includes(roomID);
     if (!roomExist) {
       const result = null;
       const error = `room with id#${roomID} not exist`;
       io.to(roomID).emit('join room event', { result, error });
     } else {
-      rooms.addUserToRoom({ roomID, user });
-      const result = rooms.getRoom(roomID);
+      storage.addUserToRoom({ roomID, user });
+      const result = storage.getRoom(roomID);
       const error = '';
       io.to(roomID).emit('join room event', { result, error });
     }
@@ -47,16 +47,16 @@ io.on('connection', (socket: Socket) => {
   });
   socket.on('pick card initiated', (data) => {
     const { roomID, userSocket } = data;
-    rooms.updateUser(data);
+    storage.updateUser(data);
     io.to(roomID).emit('user was updated', {
-      user: rooms.getUser({ roomID, userSocket }),
+      user: storage.getUser({ roomID, userSocket }),
     });
   });
   socket.on('init restart game', ({ roomId }) => {
     // reset all pickedCards in room
-    rooms.resetVotes(roomId);
+    storage.resetVotes(roomId);
     io.to(roomId).emit('restart game', {
-      userList: rooms.getRoom(roomId).userList,
+      userList: storage.getRoom(roomId).userList,
     });
   });
 });
