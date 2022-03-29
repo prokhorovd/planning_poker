@@ -4,6 +4,7 @@ import {
   addUserToRoomProps,
   getUserProps,
   updateUserProps,
+  deleteUserProps,
 } from './types';
 
 export class Store {
@@ -23,6 +24,27 @@ export class Store {
     return Store._instance;
   }
   // public methods
+
+  public tryDeleteRoom(roomID: string) {
+    // if there's no users in room - delete it
+    if (this._rooms[roomID].userList.length === 0) delete this._rooms[roomID];
+  }
+
+  public findRoomByUser(userSocket: string) {
+    const rooms = this.getRooms();
+    const roomsNames = Object.keys(rooms);
+    for (let i = 0; i < roomsNames.length; i++) {
+      if (
+        rooms[roomsNames[i]].userList.find(
+          (user) => user.userSocket === userSocket,
+        ) !== undefined
+      ) {
+        return roomsNames[i];
+      }
+    }
+    return null;
+  }
+
   public createRoom(room: Room) {
     this._rooms[room.roomID] = room;
   }
@@ -43,6 +65,16 @@ export class Store {
 
   public addUserToRoom({ roomID, user }: addUserToRoomProps) {
     this._rooms[roomID].userList.push(user);
+  }
+
+  public deleteUser({ roomID, userSocket }: deleteUserProps) {
+    const roomExist = !!this._rooms[roomID];
+    if (!!roomExist) {
+      const userIndex = this._rooms[roomID].userList.findIndex(
+        (user) => user.userSocket === userSocket,
+      );
+      this._rooms[roomID].userList.splice(userIndex, 1);
+    }
   }
 
   public updateUser({ roomID, userSocket, cardName }: updateUserProps) {

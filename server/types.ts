@@ -31,3 +31,12 @@ export interface updateUserProps {
   userSocket: string;
   cardName: string;
 }
+
+export interface updateUserListProps {
+  roomID: string;
+}
+
+export interface deleteUserProps {
+  roomID: string;
+  userSocket: string;
+}

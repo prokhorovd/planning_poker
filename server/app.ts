@@ -21,6 +21,20 @@ const io = new Server(httpServer, {
 io.on('connection', (socket: Socket) => {
   console.log(`${socket.id} connected`);
   socket.on('disconnect', (reason) => {
+    const roomID = storage.findRoomByUser(socket.id);
+    if (!roomID) {
+      console.log(
+        `${socket.id} was not registered in any room and disconnected with reason ${reason}`,
+      );
+      return;
+    }
+    // delete user and notify client side
+    storage.deleteUser({ roomID, userSocket: socket.id });
+    io.to(roomID).emit('userList was updated', {
+      userList: storage.getRoom(roomID).userList,
+    });
+    // if it was last user in room - room will be deleted
+    storage.tryDeleteRoom(roomID);
     console.log(`${socket.id} was disconnected with reason ${reason}`);
   });
   socket.on('create room', (room) => {
