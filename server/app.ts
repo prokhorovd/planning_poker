@@ -21,7 +21,7 @@ const io = new Server(httpServer, {
 io.on('connection', (socket: Socket) => {
   console.log(`${socket.id} connected`);
   socket.on('disconnect', (reason) => {
-    const roomID = storage.findRoomByUser(socket.id);
+    const roomID = storage.findRoomBySocketId(socket.id);
     if (!roomID) {
       console.log(
         `${socket.id} was not registered in any room and disconnected with reason ${reason}`,

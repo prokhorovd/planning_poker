@@ -30,7 +30,7 @@ export class Store {
     if (this._rooms[roomID].userList.length === 0) delete this._rooms[roomID];
   }
 
-  public findRoomByUser(userSocket: string) {
+  public findRoomBySocketId(userSocket: string) {
     const rooms = this.getRooms();
     const roomsNames = Object.keys(rooms);
     for (let i = 0; i < roomsNames.length; i++) {
