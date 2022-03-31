@@ -28,7 +28,15 @@ io.on('connection', (socket: Socket) => {
       );
       return;
     }
-    // delete user and notify client side
+    const disconnectedUser = storage.getUser({ roomID, userSocket: socket.id });
+    if (!!disconnectedUser?.admin) {
+      // if user was admin - kick all users
+      io.to(roomID).emit('admin has left the room');
+      storage.kickAllUsers(roomID);
+      storage.tryDeleteRoom(roomID);
+      return;
+    }
+    // if not - delete user and notify client side
     storage.deleteUser({ roomID, userSocket: socket.id });
     io.to(roomID).emit('userList was updated', {
       userList: storage.getRoom(roomID).userList,

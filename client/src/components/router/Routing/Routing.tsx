@@ -6,6 +6,7 @@ import JoinRoomPage from '../../../pages/Join/JoinRoomPage';
 import NotFoundPage from '../../../pages/NotFoundPage/NotFoundPage';
 import Lobby from '../../../pages/Lobby/Lobby';
 import store from '../../../stores/store';
+import GameOverPage from '../../../pages/GameOver/GameOverPage';
 
 const Routing: FC = () => {
   let [searchParams] = useSearchParams();
@@ -19,6 +20,7 @@ const Routing: FC = () => {
         {roomId && roomExist && (
           <Route path="room/" element={<Lobby roomId={roomId} />} />
         )}
+        <Route path="end/" element={<GameOverPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

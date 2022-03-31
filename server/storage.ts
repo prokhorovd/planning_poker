@@ -77,6 +77,10 @@ export class Store {
     }
   }
 
+  public kickAllUsers(roomID: string) {
+    this._rooms[roomID].userList = [];
+  }
+
   public updateUser({ roomID, userSocket, cardName }: updateUserProps) {
     const roomExist = !!this._rooms[roomID];
     if (!!roomExist) {

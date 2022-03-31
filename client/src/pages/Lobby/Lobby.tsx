@@ -13,6 +13,7 @@ import {
 import Cards from '../../components/Cards/Cards';
 import { fibonacciDeck } from '../../components/Cards/decks';
 import Result from '../../components/Result/Result';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   roomId: string;
@@ -23,6 +24,7 @@ function copyLink(linkText: string) {
 }
 
 const Lobby: FC<Props> = observer(({ roomId }) => {
+  const navigate = useNavigate();
   const socket = store.socket;
   const link: string = `https://${window.location.host}/join?roomId=${roomId}`;
   socket.on(
@@ -34,6 +36,10 @@ const Lobby: FC<Props> = observer(({ roomId }) => {
       }
     },
   );
+  socket.on('admin has left the room', () => {
+    store.setGameState(GameState.Login);
+    navigate('/end', { replace: true });
+  });
   socket.on('start game', () => {
     store.setGameState(GameState.Vote);
   });
