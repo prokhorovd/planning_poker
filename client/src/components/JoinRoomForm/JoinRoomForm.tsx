@@ -64,7 +64,7 @@ const JoinRoomForm: FC = () => {
             store.updateRoom(result);
             store.setCurrentUser(userName, false, socket.id);
             store.setGameState(GameState.Idle);
-            navigate(`/room?id=${values.roomID}`, { replace: true });
+            navigate(`/room?id=${result.roomID}`, { replace: true });
           }
         },
       );
