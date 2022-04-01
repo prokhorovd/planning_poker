@@ -16,7 +16,6 @@ const GameOverPage: FC = () => {
         to="/"
         onClick={() => {
           navigate('/', { replace: true });
-          window.location.reload();
         }}
       >
         Go to the main page
