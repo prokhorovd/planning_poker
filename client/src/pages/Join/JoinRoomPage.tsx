@@ -6,8 +6,11 @@ import {
   StyledJoinPageLink,
 } from './styled';
 import JoinRoomForm from '../../components/JoinRoomForm/JoinRoomForm';
+import store from '../../stores/store';
 
 const JoinRoomPage: FC = () => {
+  const socket = store.socket;
+  socket.connect();
   return (
     <StyledJoinPage>
       <StyledJoinPageHeading>Join room</StyledJoinPageHeading>

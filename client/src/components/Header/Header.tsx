@@ -13,12 +13,17 @@ const Header: FC = observer(() => {
   const navigate = useNavigate();
   const { userEmoji } = store.currentUser;
   const location = useLocation();
+  const socket = store.socket;
   return (
     <StyledHeaderLayout>
       <StyledHeaderLogo
         onClick={() => {
           // click on logo - reset game, current user and room info, navigate to CreateRoomPage
           store.setGameState(GameState.Login);
+          // send socket disconnect event so user can be removed
+          socket.disconnect();
+          store.resetCurrentUser();
+          store.resetRoom();
           navigate('/', { replace: true });
         }}
       />

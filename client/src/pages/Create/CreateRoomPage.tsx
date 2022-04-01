@@ -6,8 +6,11 @@ import {
   StyledCreatePageHeading,
   StyledCreatePageLink,
 } from './styled';
+import store from '../../stores/store';
 
 const CreateRoomPage: FC = () => {
+  const socket = store.socket;
+  socket.connect();
   return (
     <StyledCreatePage>
       <StyledCreatePageHeading>Create room</StyledCreatePageHeading>

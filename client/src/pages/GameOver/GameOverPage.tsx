@@ -5,6 +5,7 @@ import {
   StyledLink,
 } from './styled';
 import { useNavigate } from 'react-router-dom';
+import store from '../../stores/store';
 
 const GameOverPage: FC = () => {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ const GameOverPage: FC = () => {
       <StyledLink
         to="/"
         onClick={() => {
+          store.resetCurrentUser();
+          store.resetRoom();
           navigate('/', { replace: true });
         }}
       >
