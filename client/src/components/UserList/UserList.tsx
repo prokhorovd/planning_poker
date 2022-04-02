@@ -5,6 +5,13 @@ import store, { User } from '../../stores/store';
 import { observer } from 'mobx-react-lite';
 
 const UserList: FC = () => {
+  const socket = store.socket;
+  socket.on('user was updated', (data: { user: User }) => {
+    store.updateUser(data.user);
+  });
+  socket.on('userList was updated', (data: { userList: User[] }) => {
+    store.updateRoomUserList(data.userList);
+  });
   const userList = store.room!.userList;
   // make list of user cards
   const userCards = userList.map((element: User) => {

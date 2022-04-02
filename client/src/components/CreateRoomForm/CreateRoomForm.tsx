@@ -14,6 +14,7 @@ import { nanoid } from 'nanoid';
 
 const CreateRoomForm: FC = () => {
   let navigate = useNavigate();
+  const socket = store.socket;
   const [iconValidation, setIconValidation] = useState<null | boolean>(null);
   const formik = useFormik({
     initialValues: {
@@ -50,11 +51,13 @@ const CreateRoomForm: FC = () => {
         id: roomID,
         roomName,
         userName,
-        userEmoji: userEmoji,
+        userEmoji,
+        userSocket: socket.id,
       };
-      store.setCurrentUser(userName, true);
+      store.setCurrentUser(userName, true, socket.id);
       store.createRoom(roomParams);
       store.setGameState(GameState.Idle);
+      socket.emit('create room', store.room);
       navigate(`/room?id=${roomID}`, { replace: true });
     },
   });

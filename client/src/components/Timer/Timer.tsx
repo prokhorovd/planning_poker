@@ -3,7 +3,7 @@ import { StyledClockWrapper, StyledTimerWrapper } from './styled';
 import { observer } from 'mobx-react-lite';
 import store, { GameState } from '../../stores/store';
 
-const START_TIME = 4;
+const START_TIME = 10;
 
 const Timer: FC = observer(() => {
   const [timeLeft, setTimeLeft] = useState(START_TIME);
@@ -25,7 +25,6 @@ const Timer: FC = observer(() => {
       timerIdRef.current = null;
       store.setGameState(GameState.Voted);
       // setTimeLeft(START_TIME);
-      console.log('Timer have stopped!');
     }
   };
   useEffect(() => {

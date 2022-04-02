@@ -9,6 +9,8 @@ import {
 import store from '../../stores/store';
 
 const CreateRoomPage: FC = () => {
+  const socket = store.socket;
+  socket.connect();
   return (
     <StyledCreatePage>
       <StyledCreatePageHeading>Create room</StyledCreatePageHeading>
@@ -17,31 +19,6 @@ const CreateRoomPage: FC = () => {
       <StyledCreatePageLink to="/join">
         Join to the existing room
       </StyledCreatePageLink>
-      {/* remove development block below on production */}
-      <div
-        style={{
-          marginTop: '80px',
-          display: 'flex',
-          flexDirection: 'column',
-          color: 'gray',
-        }}
-      >
-        <p>development info:</p>
-        {`gameState: ${store.gameState}`}
-        <StyledCreatePageLink
-          to="/join?roomId=sdUGShS_2p"
-          onClick={() => {
-            store.createRoom({
-              id: 'sdUGShS_2p',
-              roomName: 'testRoom',
-              userEmoji: 'santa',
-              userName: 'admin',
-            });
-          }}
-        >
-          Invite link to Join Room with id:sdUGShS_2p
-        </StyledCreatePageLink>
-      </div>
     </StyledCreatePage>
   );
 };
