@@ -3,8 +3,8 @@
 This is a mentor-supervised project, implemented from figma layout to fully working full-stack app.
 Design provided by mentor, so were code-review and general development advices.
 
-#####💻 Developer: [prokhorovd](https://github.com/prokhorovd)
-#####👨‍💻 Mentor: [awpogodin](https://github.com/awpogodin)
+#### 💻 Developer: [prokhorovd](https://github.com/prokhorovd)
+#### 👨‍💻 Mentor: [awpogodin](https://github.com/awpogodin)
 
 ### Server-side
 + Nodejs + Express 
