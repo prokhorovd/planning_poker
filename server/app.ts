@@ -1,9 +1,17 @@
-require('dotenv').config();
-const path = require('path');
-const express = require('express');
+import dotenv from 'dotenv';
+dotenv.config();
+// path import
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+// express and types
+import express from 'express';
 import { Express, Request, Response } from 'express';
 const app: Express = express();
-const { createServer } = require('http');
+// create httpServer and connect socket.io
+import http from 'http';
+const { createServer } = http;
 import { Server, Socket } from 'socket.io';
 const httpServer = createServer(app);
 import { Store } from './storage';
@@ -12,7 +20,7 @@ const port = process.env.PORT || 4000;
 
 const storage = Store.getInstance();
 
-// sockets
+// socket.io
 const io = new Server(httpServer, {
   cors: {
     origin: process.env.FE_URL,
@@ -82,14 +90,24 @@ io.on('connection', (socket: Socket) => {
   });
 });
 
-app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
+// dev-prod path correction
+let pathToDist: string;
+if (process.env.DEV) {
+  pathToDist = '..';
+} else {
+  pathToDist = '../..';
+}
+
+app.use(express.static(path.join(__dirname, pathToDist, 'client', 'build')));
 
 app.get('/server', function (req: Request, res: Response) {
-  res.send('server is available');
+  res.send('Server is up and running');
 });
 
 app.get('*', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'));
+  res.sendFile(
+    path.join(__dirname, pathToDist, 'client', 'build', 'index.html'),
+  );
 });
 
 httpServer.listen(port, () => {
