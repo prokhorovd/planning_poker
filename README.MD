@@ -19,6 +19,8 @@ Design provided by mentor, so were code-review and general development advices.
 + pdf export: `html2pdf`
 + `emoji-mart` library was used for emoji-picker
 
+Also `eslint` with airbnb config and `prettier` were configured used on this project.
+
 ### Design:
 Figma layout can be found [here](https://www.figma.com/file/rKsA38JgVGFmyZjMbparIi/Poker-UI)
 
@@ -58,7 +60,7 @@ If admin leaving the room - all users will be kicked.
 
 You can see another available scripts below.
 
-##Available Scripts:
+## Available Scripts:
 ### development mode commands:
 - `npm run client:serve` to start client in dev mode, default port 3000
 - `npm run server:serve` to start server in dev mode (nodemon), default port 4000
